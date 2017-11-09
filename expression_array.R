@@ -137,16 +137,34 @@ pdf("wt_p53KD_expression_c7_sameScale.pdf")
 
 dev.off()
 
-#
-		
-common<-(((cl_wt_1$cluster==5) & cl_wt_2$cluster==13))
-common<-cl_wt$cluster==6
+# GO	
+	
+common<-cl_wt$cluster==2
 common<-as.numeric(common)
-names(common)<-rownames(data)
+names(common)<-names(cl_wt$cluster)
 pwf=nullp(common,"hg19","geneSymbol")
 GO.BP=goseq(pwf,"hg19","geneSymbol",test.cats=c("GO:BP"))
-lname="wt1c15_wt2c3_common.txt"
 q.val=p.adjust(GO.BP$over_represented_pvalue,method="BH")
-indix=q.val<.0001
-write.table(x=cbind(GO.BP$term[indix],q.val[indix]),file="cluster_2_term_qval.txt",row.names=F,col.names=F,quote=F,sep="\t")
-write.table(x=cbind(GO.BP$category[indix],q.val[indix]),file="cluster_2_category_qval.txt",row.names=F,col.names=F,quote=F,sep="\t")
+indix=q.val<.05
+GO.BP$term[indix]
+write.table(x=GO.BP$term[indix],file="cluster2_GO.txt",row.names=F,col.names=F,quote=F,sep="\t")
+		
+common<-cl_wt$cluster==6
+common<-as.numeric(common)
+names(common)<-names(cl_wt$cluster)
+pwf=nullp(common,"hg19","geneSymbol")
+GO.BP=goseq(pwf,"hg19","geneSymbol",test.cats=c("GO:BP"))
+q.val=p.adjust(GO.BP$over_represented_pvalue,method="BH")
+indix=q.val<.05
+GO.BP$term[indix]
+write.table(x=GO.BP$term[indix],file="cluster6_GO.txt",row.names=F,col.names=F,quote=F,sep="\t")
+		
+common<-cl_wt$cluster==7
+common<-as.numeric(common)
+names(common)<-names(cl_wt$cluster)
+pwf=nullp(common,"hg19","geneSymbol")
+GO.BP=goseq(pwf,"hg19","geneSymbol",test.cats=c("GO:BP"))
+q.val=p.adjust(GO.BP$over_represented_pvalue,method="BH")
+indix=q.val<.05
+GO.BP$term[indix]
+write.table(x=GO.BP$term[indix],file="cluster7_GO.txt",row.names=F,col.names=F,quote=F,sep="\t")
