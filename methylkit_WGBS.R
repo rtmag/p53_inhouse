@@ -11,7 +11,7 @@ myobj=methRead(file.list,
            context="CpG",
            pipeline="bismarkCytosineReport",
            header=FALSE,
-           mincov=3)
+           mincov=10)
 
 ##
 
