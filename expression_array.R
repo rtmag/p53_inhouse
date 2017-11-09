@@ -64,7 +64,7 @@ cont.mt <- makeContrasts(
 mtnames=rownames(mt_table[mt_table$adj.P.Val<0.05,])
 saveRDS(mtnames,"mtnames.RDS")
 
-#
+# Fuzzy clustering
 wt<-new("ExpressionSet", exprs=wt)
 wt.s<-standardise(wt)
 cl_wt<-mfuzz(wt.s,c=7,m=2.496138)
