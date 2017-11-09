@@ -65,7 +65,18 @@ mtnames=rownames(mt_table[mt_table$adj.P.Val<0.05,])
 saveRDS(mtnames,"mtnames.RDS")
 
 # Fuzzy clustering
+data<-read.table("~/Downloads/Illu-Quant.txt",row.names=1,header=T,sep="\t")
+colnames(data)<-gsub("AVG_Signal.HCT116.","",colnames(data))
+colnames(data)<-gsub("p007","WT",colnames(data))
+colnames(data)<-gsub("\\.\\.",".",colnames(data),perl=T)
+
+mtnames<-readRDS("~/Downloads/mtnames.RDS")
+
+wt=data[rownames(data) %in% mtnames,]
+wt=(data.matrix(wt[,1:4])+data.matrix(wt[,13:16]))/2
 wt<-new("ExpressionSet", exprs=wt)
 wt.s<-standardise(wt)
-cl_wt<-mfuzz(wt.s,c=7,m=2.496138)
+cl_wt<-mfuzz(wt.s,c=7,m=mestimate(wt.s))
+pdf('mfuzz.pdf')
 mfuzz.plot(wt.s,cl=cl_wt,mfrow=c(3,3),new.window=T)
+dev.off()
