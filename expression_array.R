@@ -136,3 +136,17 @@ pdf("wt_p53KD_expression_c7_sameScale.pdf")
 	plot.trajectories2(j)}
 
 dev.off()
+
+#
+		
+common<-(((cl_wt_1$cluster==5) & cl_wt_2$cluster==13))
+common<-cl_wt$cluster==6
+common<-as.numeric(common)
+names(common)<-rownames(data)
+pwf=nullp(common,"hg19","geneSymbol")
+GO.BP=goseq(pwf,"hg19","geneSymbol",test.cats=c("GO:BP"))
+lname="wt1c15_wt2c3_common.txt"
+q.val=p.adjust(GO.BP$over_represented_pvalue,method="BH")
+indix=q.val<.0001
+write.table(x=cbind(GO.BP$term[indix],q.val[indix]),file="cluster_2_term_qval.txt",row.names=F,col.names=F,quote=F,sep="\t")
+write.table(x=cbind(GO.BP$category[indix],q.val[indix]),file="cluster_2_category_qval.txt",row.names=F,col.names=F,quote=F,sep="\t")
