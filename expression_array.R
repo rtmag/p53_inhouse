@@ -168,3 +168,9 @@ q.val=p.adjust(GO.BP$over_represented_pvalue,method="BH")
 indix=q.val<.05
 GO.BP$term[indix]
 write.table(x=GO.BP$term[indix],file="cluster7_GO.txt",row.names=F,col.names=F,quote=F,sep="\t")
+
+# Write up
+write.table(names(which(cl_wt$cluster==2)),file="cluster2_names.txt",row.names=F,col.names=F,quote=F,sep="\t")
+write.table(names(which(cl_wt$cluster==6)),file="cluster6_names.txt",row.names=F,col.names=F,quote=F,sep="\t")
+write.table(names(which(cl_wt$cluster==7)),file="cluster7_names.txt",row.names=F,col.names=F,quote=F,sep="\t")
+
