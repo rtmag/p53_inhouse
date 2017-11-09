@@ -81,12 +81,19 @@ pdf('mfuzz.pdf')
 mfuzz.plot(wt.s,cl=cl_wt,mfrow=c(3,3),new.window=T)
 dev.off()
 
-# 
+saveRDS(cl_wt,"cl_wt.rds")
 
+# ploting trajectories
+cl_wt=readRDS("cl_wt.rds")
+data<-read.table("~/Downloads/Illu-Quant.txt",row.names=1,header=T,sep="\t")
+colnames(data)<-gsub("AVG_Signal.HCT116.","",colnames(data))
+colnames(data)<-gsub("p007","WT",colnames(data))
+colnames(data)<-gsub("\\.\\.",".",colnames(data),perl=T)
 
+mtnames<-readRDS("~/Downloads/mtnames.RDS")
 
 plot.trajectories2<-function(n){
-common=which(cl_wt$cluster==n)
+common=rownames(data) %in% (names(cl_wt$cluster)[cl_wt$cluster==n])
 wt1<-data[common,1:4]
 wt2<-data[common,13:16]
 dm1<-data[common,5:8]
@@ -104,7 +111,7 @@ c.min=min(confi_wt1,confi_wt2,confi_dm1,confi_dm2,confi_tp1,confi_tp2)
 c.max=max(confi_wt1,confi_wt2,confi_dm1,confi_dm2,confi_tp1,confi_tp2)
 c.name=paste("Cluster",n)
 
-plot(apply(wt1,2,mean),main=paste(c.name,"Trajectories"),type="l",ylim=c(6.6,7.4),xaxt='n',xlab="",ylab="")
+plot(apply(wt1,2,mean),main=paste(c.name,"Trajectories"),type="l",ylim=c(c.min,c.max),xaxt='n',xlab="",ylab="")
 polygon( c(1,2,3,4,rev(c(1,2,3,4)) ),c(confi_wt1[1,],rev(confi_wt1[2,])), col = alpha('salmon',.2), border = NA)
 lines(apply(wt1,2,mean),col="salmon",lwd=1.6)
 polygon( c(1,2,3,4,rev(c(1,2,3,4)) ),c(confi_wt2[1,],rev(confi_wt2[2,])), col = alpha('darkred',.2), border = NA)
@@ -124,7 +131,7 @@ legend("topright", inset=c(-0.2,0), legend=c("Wt","","DNMT1","","TP53",""), pch=
 }
 
 pdf("wt_p53KD_expression_c7_sameScale.pdf")
-	par(mfrow=c(2,2),c(5.1, 4.1, 4.1, 8.1), xpd=TRUE)
+	par(mfrow=c(3,3),c(5.1, 4.1, 4.1, 8.1), xpd=TRUE)
 	for(j in 1:7){
 	plot.trajectories2(j)}
 
