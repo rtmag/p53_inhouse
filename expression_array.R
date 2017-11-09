@@ -63,4 +63,9 @@ cont.mt <- makeContrasts(
  table(mt_table$adj.P.Val<0.05)
 mtnames=rownames(mt_table[mt_table$adj.P.Val<0.05,])
 saveRDS(mtnames,"mtnames.RDS")
+
 #
+wt<-new("ExpressionSet", exprs=wt)
+wt.s<-standardise(wt)
+cl_wt<-mfuzz(wt.s,c=7,m=2.496138)
+mfuzz.plot(wt.s,cl=cl_wt,mfrow=c(3,3),new.window=T)
