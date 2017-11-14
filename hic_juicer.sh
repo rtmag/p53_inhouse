@@ -13,3 +13,19 @@ java -jar juicer_tools.1.7.6_jcuda.0.8.jar hiccups p53_doxo_6_inter.hic /hpctmp/
 
 ##
 #DONE
+
+
+
+export PATH=/usr/local/cuda-8.0/bin${PATH:+:${PATH}}
+# GOLD GPU CLUSTER
+java -jar juicer_tools.1.7.6_jcuda.0.8.jar hiccups GSE104333_Rao-2017-untreated_combined.hic rao_hct116
+java -jar juicer_tools.1.7.6_jcuda.0.8.jar hiccups hct_dmso_24_inter.hic hct_dmso_24
+java -jar juicer_tools.1.7.6_jcuda.0.8.jar hiccups hct_doxo_24_inter.hic hct_doxo_24
+java -jar juicer_tools.1.7.6_jcuda.0.8.jar hiccups p53_dmso_24_inter.hic p53_dmso_24
+java -jar juicer_tools.1.7.6_jcuda.0.8.jar hiccups p53_doxo_24_inter.hic p53_doxo_24
+
+java -jar juicer_tools.1.7.6_jcuda.0.8.jar hiccups hct_doxo_6_inter.hic hct_doxo_6
+java -jar juicer_tools.1.7.6_jcuda.0.8.jar hiccups p53_doxo_6_inter.hic p53_doxo_6
+
+##
+#DONE
