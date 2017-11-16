@@ -30,3 +30,5 @@ time ( java -jar juicer_tools.1.7.6_jcuda.0.8.jar hiccups --ignore_sparsity p53_
 
 ##
 #DONE
+time ( java -jar juicer_tools.1.7.6_jcuda.0.8.jar hiccupsdiff --ignore_sparsity hct_doxo_24_inter.hic p53_doxo_24_inter.hic /home/ubuntu/hic/hct_doxo_24/merged_loops.bedpe /home/ubuntu/hic/p53_doxo_24/merged_loops.bedpe hiccupsDiff_wt_p53_doxo_24h ) 2> hiccupsDiff_wt_p53_doxo_24h.time > hiccupsDiff_wt_p53_doxo_24h.out
+
