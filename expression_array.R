@@ -178,7 +178,7 @@ write.table(names(which(cl_wt$cluster==7)),file="cluster7_names.txt",row.names=F
 
 		
 		
-plot.gene.trajectories<-function(n){
+plot.gene.trajectories<-function(n,legend=FALSE){
 common=rownames(data)==n
 wt1<-data[common,1:4]
 wt2<-data[common,13:16]
@@ -195,21 +195,19 @@ plot(apply(wt1,2,mean),main=paste(c.name,"Trajectories"),type="l",ylim=c(c.min,c
 lines(apply(wt1,2,mean),col="salmon",lwd=1.6)
 lines(apply(wt2,2,mean),col="darkred",lwd=1.6)
 
-lines(apply(dm1,2,mean),col="lightcyan",lwd=1.6)
-lines(apply(dm2,2,mean),col="darkblue",lwd=1.6)
-
 lines(apply(tp1,2,mean),col="olivedrab1",lwd=1.6)
 lines(apply(tp2,2,mean),col="darkgreen",lwd=1.6)
 Axis(side=1, labels=c('0h','24h','48h','72h'),at=c(1,2,3,4))
-legend("topright", legend=c("Wt","","DNMT1","","TP53",""), pch="_",col=c('salmon','darkred','lightcyan','darkblue','olivedrab1','darkgreen'),cex=.6, bty = "n")
+if(legend==TRUE){
+	legend("topright", legend=c("Wt","TP53KO"), fill=c('salmon','olivedrab1'),cex=.6, bty = "n")}
 }
 	
 pdf("Genes_trajectories_diffScale.pdf")
 par(mfrow=c(3,2))
-plot.gene.trajectories("RAD51")
-plot.gene.trajectories("LMNB1")
-plot.gene.trajectories("LMNB2")
-plot.gene.trajectories("SOD1")
-plot.gene.trajectories("SOD2")
-plot.gene.trajectories("SLC9A1")
+plot.gene.trajectories("RAD51",legend=T)
+plot.gene.trajectories("LMNB1",legend=T)
+plot.gene.trajectories("LMNB2",legend=T)
+plot.gene.trajectories("SOD1",legend=T)
+plot.gene.trajectories("SOD2",legend=T)
+plot.gene.trajectories("SLC9A1",legend=T)
 dev.off()
