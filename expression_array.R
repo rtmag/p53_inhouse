@@ -191,9 +191,12 @@ c.min=min(wt1,wt2,dm1,dm2,tp1,tp2)
 c.max=max(wt1,wt2,dm1,dm2,tp1,tp2)
 c.name=paste(n)
 
-plot(apply(wt1,2,mean),main=paste(c.name,"Trajectories"),type="l",ylim=c(c.min,c.max),xaxt='n',xlab="",ylab="")
+plot(apply(wt1,2,mean),main=paste(c.name,"after Doxorubicin tr"),type="l",ylim=c(c.min,c.max),xaxt='n',xlab="",ylab="")
 lines(apply(wt1,2,mean),col="salmon",lwd=1.6)
 lines(apply(wt2,2,mean),col="darkred",lwd=1.6)
+	
+lines(apply(dm1,2,mean),col="lightcyan",lwd=1.6)
+lines(apply(dm2,2,mean),col="darkblue",lwd=1.6)
 
 lines(apply(tp1,2,mean),col="olivedrab1",lwd=1.6)
 lines(apply(tp2,2,mean),col="darkgreen",lwd=1.6)
