@@ -1,4 +1,4 @@
-trim_galore --illumina --paired -o /root/wgbs/fastq_trim \
+trim_galore --illumina --paired -o /root/HCT116_wgbs \
 /root/HCT116_wgbs/combine_hct116_WGBS_1.fastq.gz \
 /root/HCT116_wgbs/combine_hct116_WGBS_2.fastq.gz 
 
