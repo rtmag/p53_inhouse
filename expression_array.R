@@ -62,6 +62,46 @@ cont.mt <- makeContrasts(
  mt_table=topTableF(fit_mt,number=35000, adjust="BH")
  table(mt_table$adj.P.Val<0.05)
 mtnames=rownames(mt_table[mt_table$adj.P.Val<0.05,])
+
+#### Which genes respond differently at 48 and 72h, in the mutants relative to the wild-type?
+cont.mt <- makeContrasts(
+     p53_48h=(Tp53.48h-Tp53.DMSO)-(WT.48h-WT.DMSO),
+     levels=design)
+ fit_mt <- contrasts.fit(fit, cont.mt)
+ fit_mt <- eBayes(fit_mt)
+ mt_table=topTableF(fit_mt,number=35000, adjust="BH")
+ table(mt_table$adj.P.Val<0.01)
+mtnames= rownames(mt_table[mt_table$adj.P.Val<0.01,]) 
+
+cont.mt <- makeContrasts(
+     p53_72h=(Tp53.72h-Tp53.DMSO)-(WT.72h-WT.DMSO),
+     levels=design)
+ fit_mt <- contrasts.fit(fit, cont.mt)
+ fit_mt <- eBayes(fit_mt)
+ mt_table=topTableF(fit_mt,number=35000, adjust="BH")
+ table(mt_table$adj.P.Val<0.01)
+ mtnames=mtnames[mtnames %in% rownames(mt_table[mt_table$adj.P.Val<0.01,]) ]
+
+ cont.mt <- makeContrasts(
+     dnmt1_48h=(DNMT1.48h-DNMT1.DMSO)-(WT.48h-WT.DMSO),
+     levels=design)
+ fit_mt <- contrasts.fit(fit, cont.mt)
+ fit_mt <- eBayes(fit_mt)
+ mt_table=topTableF(fit_mt,number=35000, adjust="BH")
+ table(mt_table$adj.P.Val<0.01)
+ mtnames=mtnames[mtnames %in% rownames(mt_table[mt_table$adj.P.Val<0.01,]) ]
+ 
+ cont.mt <- makeContrasts(
+     dnmt1_72h=(DNMT1.72h-DNMT1.DMSO)-(WT.72h-WT.DMSO),
+     levels=design)
+ fit_mt <- contrasts.fit(fit, cont.mt)
+ fit_mt <- eBayes(fit_mt)
+ mt_table=topTableF(fit_mt,number=35000, adjust="BH")
+ table(mt_table$adj.P.Val<0.01)
+ mtnames=mtnames[mtnames %in% rownames(mt_table[mt_table$adj.P.Val<0.01,]) ]
+ 
+##########
+
 saveRDS(mtnames,"mtnames.RDS")
 
 # Fuzzy clustering on wt
