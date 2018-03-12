@@ -167,7 +167,7 @@ lines(apply(tp1,2,mean),col="olivedrab1",lwd=1.6)
 polygon( c(1,2,3,4,rev(c(1,2,3,4)) ),c(confi_tp2[1,],rev(confi_tp2[2,])), col = alpha('darkgreen',.2), border = NA)
 lines(apply(tp2,2,mean),col="darkgreen",lwd=1.6)
 Axis(side=1, labels=c(0,24,48,72),at=c(1,2,3,4))
-legend("topright", inset=c(-0.2,0), legend=c("Wt","","DNMT1","","TP53",""), pch="_",col=c('salmon','darkred','lightcyan','darkblue','olivedrab1','darkgreen'), bty = "n",cex = 0.65)
+#legend("topright", inset=c(-0.2,0), legend=c("Wt","","DNMT1","","TP53",""), pch="_",col=c('salmon','darkred','lightcyan','darkblue','olivedrab1','darkgreen'), bty = "n",cex = 0.65)
 }
 
 pdf("wt_p53KD_expression_c7_sameScale.pdf")
