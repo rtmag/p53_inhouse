@@ -346,5 +346,15 @@ dev.off()
 write.table(lsgenes,file="cluster2_5_lsgenes_names.txt",row.names=F,col.names=F,quote=F,sep="\t")
 		
 ###
+c134 = read.csv("c1_3_4_reactome.csv")
+c134_top = c134[1:15,c(7)]
+names(c134_top) = c134[1:15,c(2)]
+c134_top = sort(-log10(c134_top))
+names(c134_top[2]) = "TP53 regulates transcription of additional cell cycle genes\nwhose exact role in the p53 pathway remain uncertain"
 		
-
+pdf("c134_pathway.pdf",width=16)		
+par(mar=c(2.1,42.1,1.1,1.1))
+barplot(c134_top,horiz=T,las=2,xlim=c(0,5))
+dev.off()
+		
+		
