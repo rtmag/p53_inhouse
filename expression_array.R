@@ -358,15 +358,14 @@ barplot(c134_top,horiz=T,las=2,xlim=c(0,5),xlab="-log10 FDR",col="#ffb3ba")
 abline(v=-log10(0.05),lty = 2)
 dev.off()
 		
-c134 = read.csv("c2_5_reactome.csv")
-c134_top = c134[1:15,c(7)]
-names(c134_top) = c134[1:15,c(2)]
-c134_top = sort(-log10(c134_top))
-names(c134_top)[2] = "TP53 regulated genes whose exact role remain uncertain"
+c134 = read.csv("c2_5_reactome_for_plot.csv")
+c134_top = c134[,2]
+names(c134_top) = c134[,1]
+c134_top = -log10(c134_top)
 		
-pdf("c25_pathway.pdf",width=15)		
-par(mar=c(5.1,29,1.1,1.1))
-barplot(c134_top,horiz=T,las=2,xlim=c(0,5),xlab="-log10 FDR",col="#bae1ff")
+pdf("c25_pathway.pdf",width=15,height=9)		
+par(mar=c(4.1,33,1.1,4))
+barplot(rev(c134_top),horiz=T,las=2,xlab="-log10 FDR",col="#bae1ff",cex.names=.8)
 abline(v=-log10(0.05),lty = 2)
 dev.off()
 		
