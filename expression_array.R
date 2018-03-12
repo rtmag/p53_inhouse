@@ -323,11 +323,28 @@ lines(apply(tp2,2,mean),col="darkgreen",lwd=1.6)
 }		
 
 # par(mar=c(5.1,4.1,4.1,2.1))
+lsgenes = names(cl_wt$cluster)[cl_wt$cluster==2 | cl_wt$cluster==5]
+lsdata = data[rownames(data) %in% lsgenes,]
+wt_48<-rowMeans(lsdata[,c(3,15)])
+wt_72<-rowMeans(lsdata[,c(4,16)])
+dm_48<-rowMeans(lsdata[,c(7,19)])
+dm_72<-rowMeans(lsdata[,c(8,20)])
+tp_48<-rowMeans(lsdata[,c(11,23)])
+tp_72<-rowMeans(lsdata[,c(12,24)])
+		
+lsgenes = lsgenes[which( (dm_48 > wt_48) & (tp_48 > wt_48) & (dm_72 > wt_72) & (tp_72 > wt_72) ) ]
+
+		
 pdf("all_genes_c2_c5.pdf")
 par(mfrow=c(10,10))
 par(mar=c(1.1,1.1,1.1,1.1))
-lsgenes = names(cl_wt$cluster)[cl_wt$cluster==2 | cl_wt$cluster==5]
 for(j in 1:length(lsgenes)){
     plot.gene.trajectories.small(lsgenes[j])
 }
 dev.off()
+
+write.table(lsgenes,file="cluster2_5_lsgenes_names.txt",row.names=F,col.names=F,quote=F,sep="\t")
+		
+###
+		
+
