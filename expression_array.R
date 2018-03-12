@@ -171,10 +171,12 @@ Axis(side=1, labels=c(0,24,48,72),at=c(1,2,3,4))
 }
 
 pdf("wt_p53KD_expression_c7_sameScale.pdf")
-	par(mfrow=c(3,3),c(5.1, 4.1, 4.1, 8.1), xpd=TRUE)
+par(mfrow=c(3,3),c(5.1, 4.1, 4.1, 8.1), xpd=TRUE)
 	for(j in 1:7){
 	plot.trajectories2(j)}
-
+	
+plot.new()
+legend("center",  legend=c("WT","DNMT1-KO","TP53-KO"), fill=c('darkred','darkblue','darkgreen'), bty = "n",cex = 2.3)
 dev.off()
 
 # GO	
