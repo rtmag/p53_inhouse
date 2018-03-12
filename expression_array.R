@@ -350,11 +350,24 @@ c134 = read.csv("c1_3_4_reactome.csv")
 c134_top = c134[1:15,c(7)]
 names(c134_top) = c134[1:15,c(2)]
 c134_top = sort(-log10(c134_top))
-names(c134_top[2]) = "TP53 regulates transcription of additional cell cycle genes\nwhose exact role in the p53 pathway remain uncertain"
+names(c134_top)[2] = "TP53 regulated genes whose exact role remain uncertain"
 		
-pdf("c134_pathway.pdf",width=16)		
-par(mar=c(2.1,42.1,1.1,1.1))
-barplot(c134_top,horiz=T,las=2,xlim=c(0,5))
+pdf("c134_pathway.pdf",width=15)		
+par(mar=c(5.1,29,1.1,1.1))
+barplot(c134_top,horiz=T,las=2,xlim=c(0,5),xlab="-log10 FDR",col="#ffb3ba")
+abline(v=-log10(0.05),lty = 2)
+dev.off()
+		
+c134 = read.csv("c2_5_reactome.csv")
+c134_top = c134[1:15,c(7)]
+names(c134_top) = c134[1:15,c(2)]
+c134_top = sort(-log10(c134_top))
+names(c134_top)[2] = "TP53 regulated genes whose exact role remain uncertain"
+		
+pdf("c25_pathway.pdf",width=15)		
+par(mar=c(5.1,29,1.1,1.1))
+barplot(c134_top,horiz=T,las=2,xlim=c(0,5),xlab="-log10 FDR",col="#bae1ff")
+abline(v=-log10(0.05),lty = 2)
 dev.off()
 		
 		
