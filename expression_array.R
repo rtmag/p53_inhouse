@@ -295,3 +295,39 @@ plot.gene.trajectories("EZH2",legend=T)
 plot.gene.trajectories("FOXM1",legend=T)
 plot.gene.trajectories("NUDT1",legend=T)
 dev.off()
+
+		
+######################################################
+plot.gene.trajectories.small<-function(n){
+common=rownames(data)==n
+wt1<-data[common,1:4]
+wt2<-data[common,13:16]
+dm1<-data[common,5:8]
+dm2<-data[common,17:20]
+tp1<-data[common,9:12]
+tp2<-data[common,21:24]
+
+c.min=min(wt1,wt2,dm1,dm2,tp1,tp2)
+c.max=max(wt1,wt2,dm1,dm2,tp1,tp2)
+c.name=paste(n)
+
+plot(apply(wt1,2,mean),main=paste(c.name),type="l",ylim=c(c.min,c.max),xaxt='n',yaxt='n',xlab="",ylab="")
+lines(apply(wt1,2,mean),col="salmon",lwd=1.6)
+lines(apply(wt2,2,mean),col="darkred",lwd=1.6)
+	
+lines(apply(dm1,2,mean),col="lightcyan",lwd=1.6)
+lines(apply(dm2,2,mean),col="darkblue",lwd=1.6)
+
+lines(apply(tp1,2,mean),col="olivedrab1",lwd=1.6)
+lines(apply(tp2,2,mean),col="darkgreen",lwd=1.6)
+}		
+
+# par(mar=c(5.1,4.1,4.1,2.1))
+pdf("all_genes_c2_c5.pdf")
+par(mfrow=c(10,10))
+par(mar=c(1.1,1.1,1.1,1.1))
+lsgenes = names(cl_wt$cluster)[cl_wt$cluster==2 | cl_wt$cluster==5]
+for(j in 1:length(lsgenes)){
+    plot.gene.trajectories.small(lsgenes[j])
+}
+dev.off()
