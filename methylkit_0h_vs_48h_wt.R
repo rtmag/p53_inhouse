@@ -15,7 +15,7 @@ myobj=methRead(file.list,
            mincov=5)
 
 meth_0=unite(myobj, destrand=TRUE,mc.cores=40)
-pooled.meth_0=pool(meth_0,sample.ids=c("WT_48h","P53KO_48h"))
+pooled.meth_0=pool(meth_0,sample.ids=c("WT_0h","WT_48h"))
 pooled.myDiff_0=calculateDiffMeth(pooled.meth_0,num.cores=40)
 pooledData_0=getData(pooled.meth_0)
 ####
