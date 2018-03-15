@@ -68,8 +68,8 @@ WT_VS_TP53_48h_dmc <- rnb.execute.computeDiffMeth(WT_VS_TP53_48h,pheno.cols=c("r
 comparison <- get.comparisons(WT_VS_TP53_48h_dmc)[1]
 WT_VS_TP53_48h_dmc_dmc_table <-get.table(WT_VS_TP53_48h_dmc, comparison, "sites", return.data.frame=TRUE)
 
-saveRDS(WT_VS_TP53_48h_dmc_table,"WT_VS_TP53_48h_dmc_table.rds")
+saveRDS(WT_VS_TP53_48h_dmc_dmc_table,"WT_VS_TP53_48h_dmc_table.rds")
 
-idx=which(abs(WT_VS_TP53_48h_dmc_table$mean.diff)>.35 & WT_VS_TP53_48h_dmc_table$diffmeth.p.adj.fdr<0.05)
+idx=which(abs(WT_VS_TP53_48h_dmc_dmc_table$mean.diff)>.35 & WT_VS_TP53_48h_dmc_dmc_table$diffmeth.p.adj.fdr<0.05)
 #############
 
