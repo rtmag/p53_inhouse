@@ -45,8 +45,31 @@ WT_VS_TP53_0h_dmc <- rnb.execute.computeDiffMeth(WT_VS_TP53_0h,pheno.cols=c("rep
 comparison <- get.comparisons(WT_VS_TP53_0h_dmc)[1]
 WT_VS_TP53_0h_dmc_dmc_table <-get.table(WT_VS_TP53_0h_dmc, comparison, "sites", return.data.frame=TRUE)
 
-saveRDS(WT_VS_TP53_0h_dmc_dmc_table,"WT_VS_TP53_0h_dmc_table.rds")
+saveRDS(WT_VS_TP53_0h_dmc_table,"WT_VS_TP53_0h_dmc_table.rds")
 
-idx=which(abs(WT_VS_TP53_0h_dmc_dmc_table$mean.diff)>.35 & WT_VS_TP53_0h_dmc_dmc_table$diffmeth.p.adj.fdr<0.05)
-###########
+idx=which(abs(WT_VS_TP53_0h_dmc_table$mean.diff)>.35 & WT_VS_TP53_0h_dmc_table$diffmeth.p.adj.fdr<0.05)
+#########################################
+#p53_24 p53_48
+TP5324h_VS_TP5348h=remove.samples(rnb.set.norm,samples(rnb.set.norm)[which(!select %in% c("p53_24","p53_48"))] )
+TP5324h_VS_TP5348h_dmc <- rnb.execute.computeDiffMeth(TP5324h_VS_TP5348h,pheno.cols=c("reps"))
+
+comparison <- get.comparisons(TP5324h_VS_TP5348h_dmc)[1]
+TP5324h_VS_TP5348h_dmc_table <-get.table(TP5324h_VS_TP5348h_dmc, comparison, "sites", return.data.frame=TRUE)
+
+saveRDS(TP5324h_VS_TP5348h_dmc_table,"TP5324h_VS_TP5348h_dmc_table.rds")
+
+idx=which(abs(TP5324h_VS_TP5348h_dmc_table$mean.diff)>.35 & TP5324h_VS_TP5348h_dmc_table$diffmeth.p.adj.fdr<0.05)
+
+#########################################
+WT_VS_TP53_48h=remove.samples(rnb.set.norm,samples(rnb.set.norm)[which(!select %in% c("wt_48","p53_48"))] )
+WT_VS_TP53_48h_dmc <- rnb.execute.computeDiffMeth(WT_VS_TP53_48h,pheno.cols=c("reps"))
+
+
+comparison <- get.comparisons(WT_VS_TP53_48h_dmc)[1]
+WT_VS_TP53_48h_dmc_dmc_table <-get.table(WT_VS_TP53_48h_dmc, comparison, "sites", return.data.frame=TRUE)
+
+saveRDS(WT_VS_TP53_48h_dmc_table,"WT_VS_TP53_48h_dmc_table.rds")
+
+idx=which(abs(WT_VS_TP53_48h_dmc_table$mean.diff)>.35 & WT_VS_TP53_48h_dmc_table$diffmeth.p.adj.fdr<0.05)
+#############
 
