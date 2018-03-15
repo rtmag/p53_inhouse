@@ -12,14 +12,33 @@ rnb.set.norm@pheno=data.frame(rnb.set.norm@pheno,
                                     "dnmt1_0","dnmt1_12","dnmt1_48","ctrl")
                              )
 
-rnb.set.norm@assembly = "hg38"
-
 select = c("wt_0","wt_12","wt_24","wt_48","p53_0","p53_12","p53_24","p53_48",
                                     "dnmt1_0","dnmt1_12","dnmt1_48","ctrl",
                                     "wt_0","wt_12","wt_24","wt_48","p53_0","p53_12","p53_24","p53_48",
                                     "dnmt1_0","dnmt1_12","dnmt1_48","ctrl")
 
+#########################################
+WT0h_VS_WT48h=remove.samples(rnb.set.norm,samples(rnb.set.norm)[which(!select %in% c("wt_0","wt_48"))] )
+
+WT0h_VS_WT48h_dmc <- rnb.execute.computeDiffMeth(WT0h_VS_WT48h,pheno.cols=c("reps"))
+
+
+comparison <- get.comparisons(WT0h_VS_WT48h_dmc)[1]
+WT0h_VS_WT48h_dmc_table <-get.table(WT0h_VS_WT48h_dmc, comparison, "sites", return.data.frame=TRUE)
+
+saveRDS(WT0h_VS_WT48h_dmc_table,"WT0h_VS_WT48h_dmc_table.rds")
+
+idx=which(abs(WT0h_VS_WT48h_dmc_table$mean.diff)>.35 & WT0h_VS_WT48h_dmc_table$diffmeth.p.adj.fdr<0.05)
+#########################################
+
 WT24h_VS_WT48h=remove.samples(rnb.set.norm,samples(rnb.set.norm)[which(!select %in% c("wt_24","wt_48"))] )
 
 WT24h_VS_WT48h_dmc <- rnb.execute.computeDiffMeth(WT24h_VS_WT48h,pheno.cols=c("reps"))
 
+
+comparison <- get.comparisons(WT24h_VS_WT48h_dmc)[1]
+WT24h_VS_WT48h_dmc_table <-get.table(WT24h_VS_WT48h_dmc, comparison, "sites", return.data.frame=TRUE)
+
+saveRDS(WT24h_VS_WT48h_dmc_table,"WT24h_VS_WT48h_dmc_table.rds")
+
+idx=which(abs(WT0h_VS_WT48h_dmc_table$mean.diff)>.35 & WT0h_VS_WT48h_dmc_table$diffmeth.p.adj.fdr<0.05)
