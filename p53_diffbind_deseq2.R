@@ -12,6 +12,8 @@ colnames(countData)=c("P53_24h_doxo","P53_48h_doxo")
 saveRDS(countData,'p53_doxo_countdata.rds')
 #####
 library(DESeq2)
+options(scipen=999)
+
 countData=readRDS('p53_doxo_countdata.rds')
 
 dds <- DESeqDataSetFromMatrix(
@@ -42,6 +44,8 @@ colnames(countData)=c("P53_24h_doxo","P53_48h_doxo")
 saveRDS(countData,'p53_doxo_summits_countdata.rds')
 #
 library(DESeq2)
+options(scipen=999)
+
 countData=readRDS('p53_doxo_summits_countdata.rds')
 
 dds <- DESeqDataSetFromMatrix(
@@ -55,3 +59,10 @@ res <- data.frame(rLogFC = assay(rld)[,2] - assay(rld)[,1],
 vst = varianceStabilizingTransformation(dds)
 res_vst <- data.frame(vstFC = assay(vst)[,2] - assay(vst)[,1],
                   p53_24h=countData[,1],p53_48h=countData[,2])
+
+x = res[rowSums(res[,2:3]>100)>0,]
+
+write.table( gsub("_!_","\t",rownames(x[x[,1]<(-0.3),]) ) , "")
+write.table( gsub("_!_","\t",rownames(x[x[,1]>0.3,]) ) , "p53_48h")
+
+
