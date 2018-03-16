@@ -88,5 +88,5 @@ computeMatrix reference-point \
 --sortRegions descend -bs 100 -a 2000 -b 2000 -p max \
 -out /root/p53_dnmt1/heatmap/control_p53_diffbind_std_wgbs.mat
 
-plotHeatmap --refPointLabel "peak" -m /root/p53_dnmt1/heatmap/control_p53_diffbind_std.mat \
+plotHeatmap --refPointLabel "peak" -m /root/p53_dnmt1/heatmap/control_p53_diffbind_std_wgbs.mat \
 --colorMap Blues -out /root/p53_dnmt1/heatmap/control_p53_diffbind_std_wgbs.pdf
