@@ -31,7 +31,7 @@ dev.off()
 
 x=readRDS("TP5324h_VS_TP5348h_dmc_table.rds")
 png("TP5324h_VS_TP5348h_volcano.png")
-plot(x$mean.diff,-log10(x$diffmeth.p.adj.fdr),xlim=c(-1,1),,ylim=c(0,.05),
+smoothScatter(x$mean.diff,-log10(x$diffmeth.p.adj.fdr),xlim=c(-1,1),ylim=c(0,3.8),
              xlab = "DNA methylation difference (TP53KO 24h / TP53KO 48h)",
              ylab = "-log10 FDR")
 dev.off()
