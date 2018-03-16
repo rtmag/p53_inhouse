@@ -78,3 +78,15 @@ computeMatrix reference-point \
 
 plotHeatmap --refPointLabel "peak" -m /root/p53_dnmt1/heatmap/control_p53_diffbind_std.mat \
 --colorMap Blues -out /root/p53_dnmt1/heatmap/control_p53_diffbind_std.pdf
+
+
+computeMatrix reference-point \
+-S /root/p53_dnmt1/bw/WT_0h_doxo_wgbs.bw \
+/root/p53_dnmt1/bw/WT_48h_doxo_wgbs.bw \
+/root/p53_dnmt1/bw/P53KO_48h_doxo_wgbs.bw \
+-R /root/stuff/diffbind/diffreps/control_p53_diffbind_std.bed --referencePoint center \
+--sortRegions descend -bs 100 -a 2000 -b 2000 -p max \
+-out /root/p53_dnmt1/heatmap/control_p53_diffbind_std_wgbs.mat
+
+plotHeatmap --refPointLabel "peak" -m /root/p53_dnmt1/heatmap/control_p53_diffbind_std.mat \
+--colorMap Blues -out /root/p53_dnmt1/heatmap/control_p53_diffbind_std_wgbs.pdf
