@@ -14,3 +14,36 @@ diffReps.pl --treatment /root/stuff/diffbind/bed/P53_48h_doxo.bed --control /roo
 
 ##
 #
+cat /root/stuff/diffbind/deseq2/p53_24h_higher_rlog.3.bed > control_p53_diffbind_rlog.3.bed
+echo "# P53 24h Doxo" >> control_p53_diffbind_rlog.3.bed
+cat /root/stuff/diffbind/deseq2/p53_48h_higher_rlog.3.bed >> control_p53_diffbind_rlog.3.bed
+echo "# P53 48h Doxo" >> control_p53_diffbind_rlog.3.bed
+
+cat /root/stuff/diffbind/deseq2/p53_24h_higher_rlog.4.bed > control_p53_diffbind_rlog.4.bed
+echo "# P53 24h Doxo" >> control_p53_diffbind_rlog.4.bed
+cat /root/stuff/diffbind/deseq2/p53_48h_higher_rlog.4.bed >> control_p53_diffbind_rlog.4.bed
+echo "# P53 48h Doxo" >> control_p53_diffbind_rlog.4.bed
+
+####
+computeMatrix reference-point \
+-S /root/p53_dnmt1/bw/P53_24h_doxo_s1.bw \
+/root/p53_dnmt1/bw/P53_48h_doxo_s1.bw \
+-R /root/stuff/diffbind/deseq2/control_p53_diffbind_rlog.3.bed --referencePoint center \
+--sortRegions descend -bs 100 -a 2000 -b 2000 -p max \
+-out /root/p53_dnmt1/heatmap/control_p53_diffbind_rlog.3.mat
+
+plotHeatmap --refPointLabel "peak" -m /root/p53_dnmt1/heatmap/control_p53_diffbind_rlog.3.mat \
+--colorMap Blues -out /root/p53_dnmt1/heatmap/control_p53_diffbind_rlog.3.pdf
+
+computeMatrix reference-point \
+-S /root/p53_dnmt1/bw/P53_24h_doxo_s1.bw \
+/root/p53_dnmt1/bw/P53_48h_doxo_s1.bw \
+-R /root/stuff/diffbind/deseq2/control_p53_diffbind_rlog.4.bed --referencePoint center \
+--sortRegions descend -bs 100 -a 2000 -b 2000 -p max \
+-out /root/p53_dnmt1/heatmap/control_p53_diffbind_rlog.4.mat
+
+plotHeatmap --refPointLabel "peak" -m /root/p53_dnmt1/heatmap/control_p53_diffbind_rlog.4.mat \
+--colorMap Blues -out /root/p53_dnmt1/heatmap/control_p53_diffbind_rlog.4.pdf
+###
+##
+#
