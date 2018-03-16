@@ -42,7 +42,7 @@ library(graphics)
 library(ggplot2)
 
 png("WT48h_VS_WT48h_volcano_WGBS.png")
-plot(fisher_0$meth.diff,-log10(fisher_0$qvalue),xlim=c(-100,100),ylim=c(0,5),
+plot(fisher_0$meth.diff,-log10(fisher_0$qvalue),xlim=c(-100,100),ylim=c(0,6),
              xlab = "DNA methylation difference (WT 0h / WT 48h)",
              ylab = "-log10 FDR",col=alpha("black",.01))
 abline(h=-log10(.05),lty=2)
