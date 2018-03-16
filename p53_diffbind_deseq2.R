@@ -62,9 +62,9 @@ res_vst <- data.frame(vstFC = assay(vst)[,2] - assay(vst)[,1],
 
 x = res[rowSums(res[,2:3]>100)>0,]
 
-write.table( gsub("_!_","\t",rownames(x[x[,1]<(-0.3),]) ) , "p53_24h_higher_rlog.3.bed")
-write.table( gsub("_!_","\t",rownames(x[x[,1]>0.3,]) ) , "p53_48h_higher_rlog.3.bed")
+write.table( gsub("_!_","\t",rownames(x[x[,1]<(-0.3),]) ) , "p53_24h_higher_rlog.3.bed", quote=F,row.names=F,col.names=F,sep="\t")
+write.table( gsub("_!_","\t",rownames(x[x[,1]>0.3,]) ) , "p53_48h_higher_rlog.3.bed", quote=F,row.names=F,col.names=F,sep="\t")
 
-write.table( gsub("_!_","\t",rownames(x[x[,1]<(-0.4),]) ) , "p53_24h_higher_rlog.4.bed")
-write.table( gsub("_!_","\t",rownames(x[x[,1]>0.4,]) ) , "p53_48h_higher_rlog.4.bed")
+write.table( gsub("_!_","\t",rownames(x[x[,1]<(-0.4),]) ) , "p53_24h_higher_rlog.4.bed", quote=F,row.names=F,col.names=F,sep="\t")
+write.table( gsub("_!_","\t",rownames(x[x[,1]>0.4,]) ) , "p53_48h_higher_rlog.4.bed", quote=F,row.names=F,col.names=F,sep="\t")
 
