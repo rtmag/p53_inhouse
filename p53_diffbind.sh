@@ -47,3 +47,34 @@ plotHeatmap --refPointLabel "peak" -m /root/p53_dnmt1/heatmap/control_p53_diffbi
 ###
 ##
 #
+
+grep "Down" P53_48h_vs_24h_nsd20_modeN.diffreps.annotated |cut -f1-3 > control_p53_diffbind_nsd20.bed
+echo "# P53 24h Doxo" >> control_p53_diffbind_nsd20.bed
+grep "Up" P53_48h_vs_24h_nsd20_modeN.diffreps.annotated |cut -f1-3 >> control_p53_diffbind_nsd20.bed
+echo "# P53 48h Doxo" >> control_p53_diffbind_nsd20.bed
+
+
+grep "Down" P53_48h_vs_24h_std_nsd20_modeN.diffreps.annotated |cut -f1-3 > control_p53_diffbind_std.bed
+echo "# P53 24h Doxo" >> control_p53_diffbind_std.bed
+grep "Up" P53_48h_vs_24h_std_nsd20_modeN.diffreps.annotated |cut -f1-3 >> control_p53_diffbind_std.bed
+echo "# P53 48h Doxo" >> control_p53_diffbind_std.bed
+###
+computeMatrix reference-point \
+-S /root/p53_dnmt1/bw/P53_24h_doxo_s1.bw \
+/root/p53_dnmt1/bw/P53_48h_doxo_s1.bw \
+-R /root/stuff/diffbind/diffreps/control_p53_diffbind_nsd20.bed --referencePoint center \
+--sortRegions descend -bs 100 -a 2000 -b 2000 -p max \
+-out /root/p53_dnmt1/heatmap/control_p53_diffbind_nsd20.mat
+
+plotHeatmap --refPointLabel "peak" -m /root/p53_dnmt1/heatmap/control_p53_diffbind_nsd20.mat \
+--colorMap Blues -out /root/p53_dnmt1/heatmap/control_p53_diffbind_nsd20.pdf
+###
+computeMatrix reference-point \
+-S /root/p53_dnmt1/bw/P53_24h_doxo_s1.bw \
+/root/p53_dnmt1/bw/P53_48h_doxo_s1.bw \
+-R /root/stuff/diffbind/diffreps/control_p53_diffbind_std.bed --referencePoint center \
+--sortRegions descend -bs 100 -a 2000 -b 2000 -p max \
+-out /root/p53_dnmt1/heatmap/control_p53_diffbind_std.mat
+
+plotHeatmap --refPointLabel "peak" -m /root/p53_dnmt1/heatmap/control_p53_diffbind_std.mat \
+--colorMap Blues -out /root/p53_dnmt1/heatmap/control_p53_diffbind_std.pdf
