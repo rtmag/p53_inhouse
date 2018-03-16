@@ -8,4 +8,9 @@ diffReps.pl --treatment /root/stuff/diffbind/bed/P53_48h_doxo.bed --control /roo
 
 ##
 
+diffReps.pl --treatment /root/stuff/diffbind/bed/P53_48h_doxo.bed --control /root/stuff/diffbind/bed/P53_24h_doxo.bed \
+--nsd 20 --std --mode n --meth gt --gname hg19 --report /root/stuff/diffbind/diffreps/P53_48h_vs_24h_std_nsd20_modeN.diffreps \
+--frag 0 --nproc 30 
 
+##
+#
