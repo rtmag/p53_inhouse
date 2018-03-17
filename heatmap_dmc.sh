@@ -19,7 +19,7 @@ computeMatrix reference-point \
 -out /root/HCT116_wgbs/methylkit/dmc_p53_48h.mat
 
 plotHeatmap --refPointLabel "CpG" -m /root/HCT116_wgbs/methylkit/dmc_p53_48h.mat \
---zMax 50 -out /root/HCT116_wgbs/methylkit/dmc_p53_48h.pdf
+--colorMap RdYlBu_r --zMax 50 -out /root/HCT116_wgbs/methylkit/dmc_p53_48h.pdf
 ##
 ####
 ##
@@ -33,4 +33,11 @@ computeMatrix reference-point \
 -out /root/p53_dnmt1/heatmap/dmc_48h_wgbs.mat
 
 plotHeatmap --refPointLabel "CpG" -m /root/p53_dnmt1/heatmap/dmc_48h_wgbs.mat \
- -out /root/p53_dnmt1/heatmap/dmc_48h_wgbs_bicolor.pdf
+--colorMap RdYlBu_r -out /root/p53_dnmt1/heatmap/dmc_48h_wgbs_bicolor.pdf
+
+
+
+plotHeatmap --refPointLabel "CpG" -m /root/HCT116_wgbs/methylkit/dmc_p53_48h.mat \
+--colorMap RdYlBu_r --zMax 50 -out /root/HCT116_wgbs/methylkit/dmc_p53_48h.pdf
+##
+##
