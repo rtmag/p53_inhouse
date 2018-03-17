@@ -41,9 +41,9 @@ fisher_0=readRDS("fisher_48.rds")
 library(graphics)
 library(ggplot2)
 
-png("WT48h_VS_WT48h_volcano_WGBS.png")
-plot(fisher_0$meth.diff,-log10(fisher_0$qvalue),xlim=c(-100,100),ylim=c(0,6),
-             xlab = "DNA methylation difference (WT 0h / WT 48h)",
+png("WT48h_VS_TP5348h_volcano_WGBS.png")
+plot(fisher_0$meth.diff,-log10(fisher_0$qvalue),xlim=c(-100,100),ylim=c(0,7),
+             xlab = "DNA methylation difference (WT 48h / TP53 48h)",
              ylab = "-log10 FDR",col=alpha("black",.01))
 abline(h=-log10(.05),lty=2)
 abline(v=50,lty=2)
@@ -55,7 +55,19 @@ points(fisher_0$meth.diff[abs(fisher_0$meth.diff)>50 & fisher_0$qvalue<0.05],
        col=alpha("#c0392b",.01) )
 dev.off()
 
+fisher_0=readRDS("fisher_0.rds")
+png("WT0h_VS_WT48h_volcano_WGBS.png")
+plot(fisher_0$meth.diff,-log10(fisher_0$qvalue),xlim=c(-100,100),ylim=c(0,7),
+             xlab = "DNA methylation difference (WT 0h / WT 48h)",
+             ylab = "-log10 FDR",col=alpha("black",.01))
+abline(h=-log10(.05),lty=2)
+abline(v=50,lty=2)
+abline(v=-50,lty=2)
+legend("topright", paste("WT 0h:",length(which(fisher_0$meth.diff>50 & fisher_0$qvalue<0.05))), bty="n") 
+legend("topleft", paste("WT 48h:",length(which(fisher_0$meth.diff<(-50) & fisher_0$qvalue<0.05))), bty="n") 
+points(fisher_0$meth.diff[abs(fisher_0$meth.diff)>50 & fisher_0$qvalue<0.05],
+       -log10(fisher_0$qvalue[abs(fisher_0$meth.diff)>50 & fisher_0$qvalue<0.05]),
+       col=alpha("#c0392b",.01) )
+dev.off()
 
-
-
-
+####
