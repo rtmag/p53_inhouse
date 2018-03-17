@@ -71,3 +71,9 @@ points(fisher_0$meth.diff[abs(fisher_0$meth.diff)>50 & fisher_0$qvalue<0.05],
 dev.off()
 
 ####
+x=readRDS("TP530h_VS_TP5348h_dmc_table.rds")
+png("TP530h_VS_TP5348h_volcano.png")
+smoothScatter(x$mean.diff,-log10(x$diffmeth.p.adj.fdr),xlim=c(-1,1),ylim=c(0,.3),
+             xlab = "DNA methylation difference (TP53KO 0h / TP53KO 48h)",
+             ylab = "-log10 FDR")
+dev.off()
