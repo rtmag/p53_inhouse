@@ -19,7 +19,7 @@ computeMatrix reference-point \
 -out /root/HCT116_wgbs/methylkit/dmc_p53_48h.mat
 
 plotHeatmap --refPointLabel "CpG" -m /root/HCT116_wgbs/methylkit/dmc_p53_48h.mat \
---zMax 45 --colorMap Blues -out /root/HCT116_wgbs/methylkit/dmc_p53_48h.pdf
+--zMax 60 --colorMap Blues -out /root/HCT116_wgbs/methylkit/dmc_p53_48h.pdf
 ##
 ####
 ##
