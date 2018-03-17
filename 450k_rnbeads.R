@@ -72,4 +72,14 @@ saveRDS(WT_VS_TP53_48h_dmc_dmc_table,"WT_VS_TP53_48h_dmc_table.rds")
 
 idx=which(abs(WT_VS_TP53_48h_dmc_dmc_table$mean.diff)>.35 & WT_VS_TP53_48h_dmc_dmc_table$diffmeth.p.adj.fdr<0.05)
 #############
+# p53 0h vs p53 48
+TP530h_VS_TP5348h=remove.samples(rnb.set.norm,samples(rnb.set.norm)[which(!select %in% c("p53_0","p53_48"))] )
+TP530h_VS_TP5348h_dmc <- rnb.execute.computeDiffMeth(TP530h_VS_TP5348h,pheno.cols=c("reps"))
 
+comparison <- get.comparisons(TP530h_VS_TP5348h_dmc)[1]
+TP530h_VS_TP5348h_dmc_table <-get.table(TP530h_VS_TP5348h_dmc, comparison, "sites", return.data.frame=TRUE)
+
+saveRDS(TP530h_VS_TP5348h_dmc_table,"TP530h_VS_TP5348h_dmc_table.rds")
+
+idx=which(abs(TP530h_VS_TP5348h_dmc_table$mean.diff)>.35 & TP530h_VS_TP5348h_dmc_table$diffmeth.p.adj.fdr<0.05)
+#
