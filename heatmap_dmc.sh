@@ -19,7 +19,18 @@ computeMatrix reference-point \
 -out /root/HCT116_wgbs/methylkit/dmc_p53_48h.mat
 
 plotHeatmap --refPointLabel "CpG" -m /root/HCT116_wgbs/methylkit/dmc_p53_48h.mat \
---zMax 60 --colorMap Blues -out /root/HCT116_wgbs/methylkit/dmc_p53_48h.pdf
+--zMax 50 -out /root/HCT116_wgbs/methylkit/dmc_p53_48h.pdf
 ##
 ####
 ##
+
+computeMatrix reference-point \
+-S /root/p53_dnmt1/bw/WT_0h_doxo_wgbs.bw \
+/root/p53_dnmt1/bw/WT_48h_doxo_wgbs.bw \
+/root/p53_dnmt1/bw/P53KO_48h_doxo_wgbs.bw \
+-R /root/HCT116_wgbs/methylkit/dmc_48h.bed --referencePoint center \
+--sortRegions descend -bs 100 -a 2000 -b 2000 -p max \
+-out /root/p53_dnmt1/heatmap/dmc_48h_wgbs.mat
+
+plotHeatmap --refPointLabel "CpG" -m /root/p53_dnmt1/heatmap/dmc_48h_wgbs.mat \
+ -out /root/p53_dnmt1/heatmap/dmc_48h_wgbs_bicolor.pdf
