@@ -1,7 +1,15 @@
-cut -f1,2 wt_48_methylated.bed|awk -F"\t" '{print $1"\t"$2"\t"$2+1}' > dmc_48h.bed
-echo "# WT 48h Methylated" >> dmc_48h.bed
-cut -f1,2,3 p53_48_methylated.bed|awk -F"\t" '{print $1"\t"$2"\t"$2+1}' >> dmc_48h.bed
-echo "# TP53KO 48h Methylated" >> dmc_48h.bed
+##
+cut -f1,2 wt_48_methylated.bed|awk -F"\t" '{print $1"\t"$2"\t"$2+1}' > cpg_methylated_in_TP53KO_48.bed
+cut -f1,2 p53_48_methylated.bed|awk -F"\t" '{print $1"\t"$2"\t"$2+1}' > cpg_methylated_in_WT_48.bed
+
+cut -f1,2 cpg_methylated_in_TP53KO_48.bed|awk -F"\t" '{print $1"\t"$2"\t"$2+1}' > dmc_48h.bed
+echo "#CpG methylated in TP53KO 48h" >> dmc_48h.bed
+cut -f1,2,3 cpg_methylated_in_WT_48.bed|awk -F"\t" '{print $1"\t"$2"\t"$2+1}' >> dmc_48h.bed
+echo "#CpG methylated in WT 48h" >> dmc_48h.bed
+
+
+##
+
 
 computeMatrix reference-point \
 -S /root/p53_dnmt1/bw/P53_24h_doxo_s1.bw \
@@ -11,7 +19,7 @@ computeMatrix reference-point \
 -out /root/HCT116_wgbs/methylkit/dmc_p53_48h.mat
 
 plotHeatmap --refPointLabel "CpG" -m /root/HCT116_wgbs/methylkit/dmc_p53_48h.mat \
---colorMap Blues -out /root/HCT116_wgbs/methylkit/dmc_p53_48h.pdf
+--zMax 45 --colorMap Blues -out /root/HCT116_wgbs/methylkit/dmc_p53_48h.pdf
 ##
 ####
 ##
