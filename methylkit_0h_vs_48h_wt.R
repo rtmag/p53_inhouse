@@ -52,4 +52,22 @@ write.csv(fisher_48,"fisher_48.csv")
 saveRDS(fisher_48,"fisher_48.rds")
 ####
 dim(fisher_0[(fisher_0$qvalue<0.05 & abs(fisher_0$meth.diff)>35),])
-dim(fisher_48[(fisher_48$qvalue<0.05 & abs(fisher_48$meth.diff)>35),])
+dim(fisher_48[(fisher_48$qvalue<0.05 & abs(fisher_48$meth.diff)>50),])
+
+
+wt48 = fisher_48[fisher_48$qvalue<0.05 & fisher_48$meth.diff>50,]
+p5348= fisher_48[fisher_48$qvalue<0.05 & fisher_48$meth.diff<(-50),]
+
+wt48 = wt48[as.numeric(wt48[,1])<25,]
+p5348 = p5348[as.numeric(p5348[,1])<25,]
+
+wt48[,1] = gsub("^","chr",wt48[,1],perl=T)
+wt48[,1] = gsub("chr23","chrX",wt48[,1],perl=T)
+wt48[,1] = gsub("chr24","chrY",wt48[,1],perl=T)
+
+p5348[,1] = gsub("^","chr",p5348[,1],perl=T)
+p5348[,1] = gsub("chr23","chrX",p5348[,1],perl=T)
+p5348[,1] = gsub("chr24","chrY",p5348[,1],perl=T)
+
+write.table(wt48,"wt_48_methylated.bed",quote=F,col.names=F,row.names=F,sep="\t")
+write.table(p5348,"p53_48_methylated.bed",quote=F,col.names=F,row.names=F,sep="\t")
