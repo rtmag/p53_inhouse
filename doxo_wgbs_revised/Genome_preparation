@@ -1,0 +1,4 @@
+####################################################################################
+# Preparation of WT bs index
+
+/root/myPrograms/Bismark/bismark_genome_preparation --bowtie2 /root/resources/hg38_bismark_vanilla
