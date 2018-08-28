@@ -262,10 +262,11 @@ plot.gene.trajectories("SLC9A1",legend=T)
 dev.off()
 
 pdf("Genes_Luo_Le.pdf")
-par(mfrow=c(3,2))
+par(mfrow=c(3,3))
 plot.gene.trajectories("FOXM1",legend=T)
 plot.gene.trajectories("CDKN1A",legend=T)
 plot.gene.trajectories("CDKN2A",legend=T)
+		
 plot.gene.trajectories("RAD51",legend=T)
 plot.gene.trajectories("LMNB1",legend=T)
 plot.gene.trajectories("LMNB2",legend=T)
@@ -273,9 +274,18 @@ plot.gene.trajectories("LMNB2",legend=T)
 plot.gene.trajectories("SOD1",legend=T)
 plot.gene.trajectories("SOD2",legend=T)
 plot.gene.trajectories("H2AFX",legend=T)
+		
 plot.gene.trajectories("H2AFZ",legend=T)
 plot.gene.trajectories("H2AFV",legend=T)
 plot.gene.trajectories("CDK2",legend=T)
+plot.gene.trajectories("CDKN3",legend=T)
+plot.gene.trajectories("FEN1",legend=T)
+plot.gene.trajectories("RFC4",legend=T)
+plot.gene.trajectories("FANCI",legend=T)
+plot.gene.trajectories("E2F2",legend=T)
+plot.gene.trajectories("EXO1",legend=T)
+
+		
 dev.off()
 
 pdf("Genes_trajectories_lowestQvalue.pdf")
