@@ -32,14 +32,6 @@ if(legend==TRUE){
 	legend("topright", legend=c("Wt","TP53KO","DNMT1KO"), fill=c('salmon','olivedrab1','darkblue'),cex=.6, bty = "n")}
 }
 
-# Senescence and apoptosis: dueling or complementary cell fates? EMBO review 2014 Notes
-
--ATM recognizes stress and phosphorilates p53.
--p14Arf inhibits MDM2, while MDM2 ubiquitinates p53 for degradation.
--ATM might supress ARF in some cases, high level regulation of this interaction is not understood.
--p53 upregulates p21, which in turn triggers initial cell cycle arrest to give the cell time to repair the DNA (before S-phase entry).
--Prolonged arrest activates the CDKi p16Ink4a, which in turns activates Rb. (prolonged p16Ink4a results in permanent cell cycle arrest.
-
 pdf("general_sns.pdf")
 par(mfrow=c(3,3))
 plot.gene.trajectories("ATM",legend=T)
@@ -54,4 +46,14 @@ plot.gene.trajectories("E2F7",legend=F)
 plot.gene.trajectories("FOXM1",legend=F)
 plot.gene.trajectories("E2F3",legend=F)
 dev.off()
+
+# Senescence and apoptosis: dueling or complementary cell fates? EMBO review 2014 Notes
+
+-ATM recognizes stress and phosphorilates p53.
+-p14Arf inhibits MDM2, while MDM2 ubiquitinates p53 for degradation.
+-ATM might supress ARF in some cases, high level regulation of this interaction is not understood.
+-p53 upregulates p21, which in turn triggers initial cell cycle arrest to give the cell time to repair the DNA (before S-phase entry).
+-Prolonged arrest activates the CDKi p16Ink4a, which in turns activates Rb. (prolonged p16Ink4a results in permanent cell cycle arrest.
+
+
 
