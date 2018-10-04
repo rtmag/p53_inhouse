@@ -32,19 +32,60 @@ if(legend==TRUE){
 	legend("topright", legend=c("Wt","TP53KO","DNMT1KO"), fill=c('salmon','olivedrab1','darkblue'),cex=.6, bty = "n")}
 }
 
-pdf("general_sns.pdf")
+options(bitmapType="cairo")
+options(scipen=999)
+data<-read.table("Illu-Quant.txt",row.names=1,header=T,sep="\t")
+
+
+pdf("general_sns2.pdf")
 par(mfrow=c(3,3))
+plot.gene.trajectories("KAT5",legend=T)
+plot.gene.trajectories("SUV39H1",legend=F)
+plot.gene.trajectories("SUV39H2",legend=F)
+
+plot.gene.trajectories("EHMT1",legend=F)
+plot.gene.trajectories("EHMT2",legend=F)
+plot.gene.trajectories("TRIM28",legend=F)
+
+plot.gene.trajectories("CBX5",legend=F)
+plot.gene.trajectories("IL6",legend=F)
+plot.gene.trajectories("IL8",legend=F)
+#
 plot.gene.trajectories("ATM",legend=T)
+plot.gene.trajectories("ATR",legend=F)
 plot.gene.trajectories("TP53",legend=F)
+
 plot.gene.trajectories("CDKN1A",legend=F)
-		
 plot.gene.trajectories("MDM2",legend=F)
 plot.gene.trajectories("CDKN2A",legend=F)
-plot.gene.trajectories("RB1",legend=F)
 
+plot.gene.trajectories("RB1",legend=F)
 plot.gene.trajectories("E2F7",legend=F)
 plot.gene.trajectories("FOXM1",legend=F)
+#
+plot.gene.trajectories("PTEN",legend=T)
+plot.gene.trajectories("AKT1",legend=F)
+plot.gene.trajectories("AKT2",legend=F)
+
+plot.gene.trajectories("KRAS",legend=F)
+plot.gene.trajectories("FRAP1",legend=F)
 plot.gene.trajectories("E2F3",legend=F)
+
+plot.gene.trajectories("DNMT1",legend=F)
+plot.gene.trajectories("DNMT3A",legend=F)
+plot.gene.trajectories("DNMT3B",legend=F)
+#
+plot.gene.trajectories("MAPK14",legend=T)
+plot.gene.trajectories("BCL2",legend=F)
+plot.gene.trajectories("BAX",legend=F)
+
+plot.gene.trajectories("BAK1",legend=F)
+plot.gene.trajectories("BBC3",legend=F)
+plot.gene.trajectories("LMNB1",legend=F)
+
+plot.gene.trajectories("LMNB2",legend=F)
+plot.gene.trajectories("CDK2",legend=F)
+plot.gene.trajectories("CDK4",legend=F)
 dev.off()
 
 # Senescence and apoptosis: dueling or complementary cell fates? EMBO review 2014 Notes
