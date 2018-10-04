@@ -36,6 +36,21 @@ options(bitmapType="cairo")
 options(scipen=999)
 data<-read.table("Illu-Quant.txt",row.names=1,header=T,sep="\t")
 
+pdf("gene_OMNI.pdf")
+par(mfrow=c(3,3))
+plot.gene.trajectories("CCNB1",legend=F)
+plot.gene.trajectories("BRCA1",legend=F)
+plot.gene.trajectories("BRCA2",legend=F)
+
+plot.gene.trajectories("RAD51",legend=F)
+plot.gene.trajectories("RAD54L",legend=F)
+plot.gene.trajectories("BIRC5",legend=F)
+
+plot.gene.trajectories("PLK1",legend=F)
+plot.gene.trajectories("CDC6",legend=F)
+plot.gene.trajectories("FAS",legend=F)
+dev.off()
+
 
 pdf("general_sns2.pdf")
 par(mfrow=c(3,3))
