@@ -6,6 +6,8 @@ SNS_10 = c("DEP10","NTAL","EBP50","STX4","VAMP3","ARMCX3","B2MG","LANCL1","VPS26
 SNS_20 = c("PVRL4","GPR172B","DAO","CCDC74B","LOXL4","EVL","PRODH","E2F7","LY6D","IGFBP2","CRABP2","EPN3","APOBEC3B","IER5",
           "ANGPTL2","SLC48AI","WBSCR27","E2F2","NXPH4","PPMID","CDKN1A","BTG2","SULF2")
 
+SNS_20_p53_dependent = c("PVRL4","PRODH","LY6D","DAO","EPN3","GPR172B")
+
 # Apoptosis RT2 Profiler PCR Array https://www.qiagen.com/ca/shop/pcr/primer-sets/rt2-profiler-pcr-arrays/?catno=PAHS-012Z#geneglobe
 DNA_damage_repair = c("ABL1", "CIDEA", "CIDEB", "TP53", "TP73")
 extracellular_signal = c("CFLAR", "DAPK1", "TNFRSF25")
