@@ -19,7 +19,7 @@ pro_apoptotic = c("BAD", "BAK1", "BAX", "BCL10", "BCL2L11", "BID", "BIK", "BNIP3
  "CASP3", "CASP4", "CASP6", "CASP8", "CD27", "CD70", "CYCS", "DFFA", "DIABLO", "FAS", "FASLG", "GADD45A", "HRK", "LTA", "NOD1", 
  "PYCARD", "TNFRSF10A", "TNFRSF9", "TNFSF10", "TNFSF8", "TP53BP2", "TRADD", "TRAF3")
 
-anti-apoptotic = c("AKT1", "BAG1", "BAG3", "BAX", "BCL2", "BCL2A1", "BCL2L1", "BCL2L10", "BCL2L2", "BFAR", "BIRC3", "BIRC5", 
+anti_apoptotic = c("AKT1", "BAG1", "BAG3", "BAX", "BCL2", "BCL2A1", "BCL2L1", "BCL2L10", "BCL2L2", "BFAR", "BIRC3", "BIRC5", 
 "BIRC6", "BNIP2", "BNIP3", "BNIP3L", "BRAF", "CD27", "CD40LG", "CFLAR", "DAPK1", "FAS", "HRK", "IGF1R", "IL10", "MCL1", "NAIP", 
 "NFKB1", "NOL3", "RIPK2", "TNF", "XIAP")
 
@@ -38,3 +38,117 @@ caspases = c( "CASP1", "CASP10", "CASP14", "CASP2", "CASP3", "CASP4", "CASP5", "
  "CFLAR", "CRADD", "PYCARD")
 caspase_activation = c("AIFM1", "APAF1", "BAX", "BCL2L10", "CASP1", "CASP9", "NOD1", "PYCARD", "TNFRSF10A", "TNFRSF10B", "TP53")
 caspase_inhibition = c("CD27", "XIAP")
+
+################################################################################################################################
+options(bitmapType="cairo")
+options(scipen=999)
+library(gplots)
+library(factoextra)
+library(RColorBrewer)
+
+data<-read.table("Illu-Quant.txt",row.names=1,header=T,sep="\t")
+data = data[,c(1,13,2,14,3,15,4,16,
+                9,21,10,22,11,23,12,24,
+                5,17,6,18,7,19,8,20)]
+
+colnames(data) = c("WT 0h","WT 0h","WT 24h","WT 24h","WT 48h","WT 48h","WT 72h","WT 72h",
+                      "TP53KO 0h","TP53KO 0h","TP53KO 24h","TP53KO 24h","TP53KO 48h","TP53KO 48h","TP53KO 72h","TP53KO 72h",
+                      "DNMT1KO 0h","DNMT1KO 0h","DNMT1KO 24h","DNMT1KO 24h","DNMT1KO 48h","DNMT1KO 48h","DNMT1KO 72h","DNMT1KO 72h")
+#colors <- rev(colorRampPalette( (brewer.pal(9, "RdBu")) )(20))
+colors <-  colorRampPalette(c("green","black", "red"))(20)
+
+### SNS Classic
+pdf("sns_class.pdf")
+sig_vsd = data[rownames(data) %in% sns_class,]
+  heatmap.2(as.matrix(sig_vsd),col=colors,scale="row", trace="none",distfun = function(x) get_dist(x,method="pearson"),srtCol=90,
+  xlab="", ylab="",main="Senescence Classic Genes",key.title="Gene expression",cexCol=.65,cexRow=.7,dendrogram="row",Colv=F)
+dev.off()
+### SNS 10 genes
+pdf("SNS_10.pdf")
+sig_vsd = data[rownames(data) %in% SNS_10,]
+  heatmap.2(as.matrix(sig_vsd),col=colors,scale="row", trace="none",distfun = function(x) get_dist(x,method="pearson"),srtCol=90,
+  xlab="", ylab="",main="Senescence Althubiti, et al.\nCell Death and Disease 2014",key.title="Gene expression",cexCol=.65,cexRow=.7
+            ,dendrogram="row",Colv=F)
+dev.off()
+### SNS 20 genes
+pdf("SNS_20.pdf")
+sig_vsd = data[rownames(data) %in% SNS_20,]
+  heatmap.2(as.matrix(sig_vsd),col=colors,scale="row", trace="none",distfun = function(x) get_dist(x,method="pearson"),srtCol=90,
+  xlab="", ylab="",main="Senescence Nagano, et al.\nScientific Reports 2016",key.title="Gene expression",cexCol=.65,cexRow=.7,
+            dendrogram="row",Colv=F)
+dev.off()
+### SNS_20_p53_dependent
+pdf("SNS_20_p53_dependent.pdf")
+sig_vsd = data[rownames(data) %in% SNS_20_p53_dependent,]
+  heatmap.2(as.matrix(sig_vsd),col=colors,scale="row", trace="none",distfun = function(x) get_dist(x,method="pearson"),srtCol=90,
+  xlab="", ylab="",main="Senescence Nagano, et al. \nScientific Reports 2016",key.title="Gene expression",cexCol=.65,cexRow=.7,
+            dendrogram="row",Colv=F)
+dev.off()
+### DNA_damage_repair
+pdf("DNA_damage_repair.pdf")
+sig_vsd = data[rownames(data) %in% DNA_damage_repair,]
+  heatmap.2(as.matrix(sig_vsd),col=colors,scale="row", trace="none",distfun = function(x) get_dist(x,method="pearson"),srtCol=90,
+  xlab="", ylab="",main="DNA Damage and Repair",key.title="Gene expression",cexCol=.65,cexRow=.7,
+            dendrogram="row",Colv=F)
+dev.off()
+### extracellular_signal
+pdf("extracellular_signal.pdf")
+sig_vsd = data[rownames(data) %in% extracellular_signal,]
+  heatmap.2(as.matrix(sig_vsd),col=colors,scale="row", trace="none",distfun = function(x) get_dist(x,method="pearson"),srtCol=90,
+  xlab="", ylab="",main="Apoptosis extracellular\nsignal",key.title="Gene expression",cexCol=.65,cexRow=.7,
+            dendrogram="row",Colv=F)
+### pro_apoptotic
+pdf("pro_apoptotic.pdf")
+sig_vsd = data[rownames(data) %in% pro_apoptotic,]
+  heatmap.2(as.matrix(sig_vsd),col=colors,scale="row", trace="none",distfun = function(x) get_dist(x,method="pearson"),srtCol=90,
+  xlab="", ylab="",main="Pro Apoptotic",key.title="Gene expression",cexCol=.65,cexRow=.7,
+            dendrogram="row",Colv=F)
+### DNA_damage_repair
+pdf("anti_apoptotic.pdf")
+sig_vsd = data[rownames(data) %in% anti_apoptotic,]
+  heatmap.2(as.matrix(sig_vsd),col=colors,scale="row", trace="none",distfun = function(x) get_dist(x,method="pearson"),srtCol=90,
+  xlab="", ylab="",main="Anti Apoptotic",key.title="Gene expression",cexCol=.65,cexRow=.7,
+            dendrogram="row",Colv=F)
+dev.off()
+### negative_regulation_apoptosis
+pdf("negative_regulation_apoptosis.pdf")
+sig_vsd = data[rownames(data) %in% negative_regulation_apoptosis,]
+  heatmap.2(as.matrix(sig_vsd),col=colors,scale="row", trace="none",distfun = function(x) get_dist(x,method="pearson"),srtCol=90,
+  xlab="", ylab="",main="Negative Regulation Apoptosis",key.title="Gene expression",cexCol=.65,cexRow=.7,
+            dendrogram="row",Colv=F)
+dev.off()
+### positive_regulation_apoptosis
+pdf("positive_regulation_apoptosis.pdf")
+sig_vsd = data[rownames(data) %in% positive_regulation_apoptosis,]
+  heatmap.2(as.matrix(sig_vsd),col=colors,scale="row", trace="none",distfun = function(x) get_dist(x,method="pearson"),srtCol=90,
+  xlab="", ylab="",main="Positive Regulation Apoptotis",key.title="Gene expression",cexCol=.65,cexRow=.7,
+            dendrogram="row",Colv=F)
+dev.off()
+### death_domain_receptor
+pdf("death_domain_receptor.pdf")
+sig_vsd = data[rownames(data) %in% death_domain_receptor,]
+  heatmap.2(as.matrix(sig_vsd),col=colors,scale="row", trace="none",distfun = function(x) get_dist(x,method="pearson"),srtCol=90,
+  xlab="", ylab="",main="Death Domain Receptor",key.title="Gene expression",cexCol=.65,cexRow=.7,
+            dendrogram="row",Colv=F)
+dev.off()
+### caspases
+pdf("caspases.pdf")
+sig_vsd = data[rownames(data) %in% caspases,]
+  heatmap.2(as.matrix(sig_vsd),col=colors,scale="row", trace="none",distfun = function(x) get_dist(x,method="pearson"),srtCol=90,
+  xlab="", ylab="",main="Caspases",key.title="Gene expression",cexCol=.65,cexRow=.7,
+            dendrogram="row",Colv=F)
+dev.off()
+### caspase_activation
+pdf("caspase_activation.pdf")
+sig_vsd = data[rownames(data) %in% caspase_activation,]
+  heatmap.2(as.matrix(sig_vsd),col=colors,scale="row", trace="none",distfun = function(x) get_dist(x,method="pearson"),srtCol=90,
+  xlab="", ylab="",main="Caspase Activation",key.title="Gene expression",cexCol=.65,cexRow=.7,
+            dendrogram="row",Colv=F)
+dev.off()
+### caspase_inhibition
+pdf("caspase_inhibition.pdf")
+sig_vsd = data[rownames(data) %in% caspase_inhibition,]
+  heatmap.2(as.matrix(sig_vsd),col=colors,scale="row", trace="none",distfun = function(x) get_dist(x,method="pearson"),srtCol=90,
+  xlab="", ylab="",main="Caspase Inhibition",key.title="Gene expression",cexCol=.65,cexRow=.7,
+            dendrogram="row",Colv=F)
+dev.off()
