@@ -103,6 +103,7 @@ sig_vsd = data[rownames(data) %in% pro_apoptotic,]
   heatmap.2(as.matrix(sig_vsd),col=colors,scale="row", trace="none",distfun = function(x) get_dist(x,method="pearson"),srtCol=90,
   xlab="", ylab="",main="Pro Apoptotic",key.title="Gene expression",cexCol=.65,cexRow=.7,
             dendrogram="row",Colv=F)
+dev.off()
 ### DNA_damage_repair
 pdf("anti_apoptotic.pdf")
 sig_vsd = data[rownames(data) %in% anti_apoptotic,]
