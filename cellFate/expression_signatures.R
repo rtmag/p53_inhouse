@@ -153,3 +153,11 @@ sig_vsd = data[rownames(data) %in% caspase_inhibition,]
   xlab="", ylab="",main="Caspase Inhibition",key.title="Gene expression",cexCol=.65,cexRow=.7,
             dendrogram="row",Colv=F)
 dev.off()
+#####################
+# SCALER
+scaler = function(x){
+  x[,1:8]= x[,1:8]/rowMeans(x[,1:8])
+  x[,9:16]= x[,9:16]/rowMeans(x[,9:16])
+  x[,17:24]= x[,17:24]/rowMeans(x[,17:24])
+  
+  return(x)
