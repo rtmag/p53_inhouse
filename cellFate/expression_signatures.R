@@ -1,7 +1,7 @@
 # SENESENCE 
 # Clasical markers
 sns_class = c("CDKN1A","CDKN2A","CDKN2B","CDK4","CDK6","CDK2","RB1","NOTCH3","LMNB1",
-              "CXCL1","CXCL2","IL6","IL8","IL10","SIRT1","MAPK","GLB1","NOTCH1")
+              "CXCL1","CXCL2","IL6","IL8","IL10","SIRT1","MAPK11","GLB1","NOTCH1")
 
 # 10 gene Marker Althubiti, et al. Cell Death and Disease 2014.
 SNS_10 = c("DEP10","NTAL","EBP50","STX4","VAMP3","ARMCX3","B2MG","LANCL1","VPS26A","PLD3")
