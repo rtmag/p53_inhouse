@@ -226,7 +226,7 @@ sig_vsd = data[rownames(data) %in% extracellular_signal,]
   xlab="", ylab="",main="Apoptosis extracellular\nsignal",key.title="Gene expression",cexCol=.65,cexRow=.7,
             dendrogram="row",Colv=F,
              key.xlab="Log2 difference\nfrom baseline expression",density.info="none",breaks = seq(-1.5, 1.5, length.out = 21))
-
+dev.off()
 ### pro_apoptotic
 pdf("pro_apoptotic_scaled_centered.pdf")
 sig_vsd = data[rownames(data) %in% pro_apoptotic,]
@@ -236,7 +236,7 @@ sig_vsd = data[rownames(data) %in% pro_apoptotic,]
              key.xlab="Log2 difference\nfrom baseline expression",density.info="none",breaks = seq(-1.5, 1.5, length.out = 21))
 
 dev.off()
-### DNA_damage_repair
+### anti_apoptotic
 pdf("anti_apoptotic_scaled_centered.pdf")
 sig_vsd = data[rownames(data) %in% anti_apoptotic,]
   heatmap.2(scalerIN(sig_vsd),col=colors,scale="none", trace="none",distfun = function(x) get_dist(x,method="pearson"),srtCol=90,
