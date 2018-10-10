@@ -156,8 +156,147 @@ dev.off()
 #####################
 # SCALER
 scaler = function(x){
-  x[,1:8]= x[,1:8]/rowMeans(x[,1:8])
-  x[,9:16]= x[,9:16]/rowMeans(x[,9:16])
-  x[,17:24]= x[,17:24]/rowMeans(x[,17:24])
-  
-  return(x)
+  x[,1:8]= x[,1:8]-rowMeans(x[,1:8])
+  x[,9:16]= x[,9:16]-rowMeans(x[,9:16])
+  x[,17:24]= x[,17:24]-rowMeans(x[,17:24])
+  return(as.matrix(x) )}
+
+scalerIN = function(x){
+  x[,1:8]= x[,1:8]-rowMeans(x[,1:2])
+  x[,9:16]= x[,9:16]-rowMeans(x[,9:10])
+  x[,17:24]= x[,17:24]-rowMeans(x[,17:18])
+  return(as.matrix(x) )}
+
+colors <-  greenred(20)
+
+sig_vsd = data[rownames(data) %in% sns_class,]
+  heatmap.2(scalerIN(sig_vsd),col=colors,scale="none", trace="none",distfun = function(x) get_dist(x,method="pearson"),srtCol=90,
+  xlab="", ylab="",main="Senescence Classic Genes",key.title="Gene expression",cexCol=.65,cexRow=.7,dendrogram="row",Colv=F,
+ key.xlab="Log2 difference\nfrom baseline expression",density.info="none",breaks = seq(-1.5, 1.5, length.out = 21))
+#
+
+### SNS Classic
+pdf("sns_class_scaled_centered.pdf")
+sig_vsd = data[rownames(data) %in% sns_class,]
+  heatmap.2(scalerIN(sig_vsd),col=colors,scale="none", trace="none",distfun = function(x) get_dist(x,method="pearson"),srtCol=90,
+  xlab="", ylab="",main="Senescence Classic Genes",key.title="Gene expression",cexCol=.65,cexRow=.7,dendrogram="row",Colv=F,
+             key.xlab="Log2 difference\nfrom baseline expression",density.info="none",breaks = seq(-1.5, 1.5, length.out = 21))
+
+dev.off()
+### SNS 10 genes
+pdf("SNS_10_scaled_centered.pdf")
+sig_vsd = data[rownames(data) %in% SNS_10,]
+  heatmap.2(scalerIN(sig_vsd),col=colors,scale="none", trace="none",distfun = function(x) get_dist(x,method="pearson"),srtCol=90,
+  xlab="", ylab="",main="Senescence Althubiti, et al.\nCell Death and Disease 2014",key.title="Gene expression",cexCol=.65,cexRow=.7
+            ,dendrogram="row",Colv=F,
+             key.xlab="Log2 difference\nfrom baseline expression",density.info="none",breaks = seq(-1.5, 1.5, length.out = 21))
+
+dev.off()
+### SNS 20 genes
+pdf("SNS_20_scaled_centered.pdf")
+sig_vsd = data[rownames(data) %in% SNS_20,]
+  heatmap.2(scalerIN(sig_vsd),col=colors,scale="none", trace="none",distfun = function(x) get_dist(x,method="pearson"),srtCol=90,
+  xlab="", ylab="",main="Senescence Nagano, et al.\nScientific Reports 2016",key.title="Gene expression",cexCol=.65,cexRow=.7,
+            dendrogram="row",Colv=F,
+             key.xlab="Log2 difference\nfrom baseline expression",density.info="none",breaks = seq(-1.5, 1.5, length.out = 21))
+
+dev.off()
+### SNS_20_p53_dependent
+pdf("SNS_20_p53_dependent_scaled_centered.pdf")
+sig_vsd = data[rownames(data) %in% SNS_20_p53_dependent,]
+  heatmap.2(scalerIN(sig_vsd),col=colors,scale="none", trace="none",distfun = function(x) get_dist(x,method="pearson"),srtCol=90,
+  xlab="", ylab="",main="Senescence Nagano, et al. \nScientific Reports 2016",key.title="Gene expression",cexCol=.65,cexRow=.7,
+            dendrogram="row",Colv=F,
+             key.xlab="Log2 difference\nfrom baseline expression",density.info="none",breaks = seq(-1.5, 1.5, length.out = 21))
+
+dev.off()
+### DNA_damage_repair
+pdf("DNA_damage_repair_scaled_centered.pdf")
+sig_vsd = data[rownames(data) %in% DNA_damage_repair,]
+  heatmap.2(scalerIN(sig_vsd),col=colors,scale="none", trace="none",distfun = function(x) get_dist(x,method="pearson"),srtCol=90,
+  xlab="", ylab="",main="DNA Damage and Repair",key.title="Gene expression",cexCol=.65,cexRow=.7,
+            dendrogram="row",Colv=F,
+             key.xlab="Log2 difference\nfrom baseline expression",density.info="none",breaks = seq(-1.5, 1.5, length.out = 21))
+
+dev.off()
+### extracellular_signal
+pdf("extracellular_signal_scaled_centered.pdf")
+sig_vsd = data[rownames(data) %in% extracellular_signal,]
+  heatmap.2(scalerIN(sig_vsd),col=colors,scale="none", trace="none",distfun = function(x) get_dist(x,method="pearson"),srtCol=90,
+  xlab="", ylab="",main="Apoptosis extracellular\nsignal",key.title="Gene expression",cexCol=.65,cexRow=.7,
+            dendrogram="row",Colv=F,
+             key.xlab="Log2 difference\nfrom baseline expression",density.info="none",breaks = seq(-1.5, 1.5, length.out = 21))
+
+### pro_apoptotic
+pdf("pro_apoptotic_scaled_centered.pdf")
+sig_vsd = data[rownames(data) %in% pro_apoptotic,]
+  heatmap.2(scalerIN(sig_vsd),col=colors,scale="none", trace="none",distfun = function(x) get_dist(x,method="pearson"),srtCol=90,
+  xlab="", ylab="",main="Pro Apoptotic",key.title="Gene expression",cexCol=.65,cexRow=.7,
+            dendrogram="row",Colv=F,
+             key.xlab="Log2 difference\nfrom baseline expression",density.info="none",breaks = seq(-1.5, 1.5, length.out = 21))
+
+dev.off()
+### DNA_damage_repair
+pdf("anti_apoptotic_scaled_centered.pdf")
+sig_vsd = data[rownames(data) %in% anti_apoptotic,]
+  heatmap.2(scalerIN(sig_vsd),col=colors,scale="none", trace="none",distfun = function(x) get_dist(x,method="pearson"),srtCol=90,
+  xlab="", ylab="",main="Anti Apoptotic",key.title="Gene expression",cexCol=.65,cexRow=.7,
+            dendrogram="row",Colv=F,
+             key.xlab="Log2 difference\nfrom baseline expression",density.info="none",breaks = seq(-1.5, 1.5, length.out = 21))
+
+dev.off()
+### negative_regulation_apoptosis
+pdf("negative_regulation_apoptosis_scaled_centered.pdf")
+sig_vsd = data[rownames(data) %in% negative_regulation_apoptosis,]
+  heatmap.2(scalerIN(sig_vsd),col=colors,scale="none", trace="none",distfun = function(x) get_dist(x,method="pearson"),srtCol=90,
+  xlab="", ylab="",main="Negative Regulation Apoptosis",key.title="Gene expression",cexCol=.65,cexRow=.7,
+            dendrogram="row",Colv=F,
+             key.xlab="Log2 difference\nfrom baseline expression",density.info="none",breaks = seq(-1.5, 1.5, length.out = 21))
+
+dev.off()
+### positive_regulation_apoptosis
+pdf("positive_regulation_apoptosis_scaled_centered.pdf")
+sig_vsd = data[rownames(data) %in% positive_regulation_apoptosis,]
+  heatmap.2(scalerIN(sig_vsd),col=colors,scale="none", trace="none",distfun = function(x) get_dist(x,method="pearson"),srtCol=90,
+  xlab="", ylab="",main="Positive Regulation Apoptotis",key.title="Gene expression",cexCol=.65,cexRow=.7,
+            dendrogram="row",Colv=F,
+             key.xlab="Log2 difference\nfrom baseline expression",density.info="none",breaks = seq(-1.5, 1.5, length.out = 21))
+
+dev.off()
+### death_domain_receptor
+pdf("death_domain_receptor_scaled_centered.pdf")
+sig_vsd = data[rownames(data) %in% death_domain_receptor,]
+  heatmap.2(scalerIN(sig_vsd),col=colors,scale="none", trace="none",distfun = function(x) get_dist(x,method="pearson"),srtCol=90,
+  xlab="", ylab="",main="Death Domain Receptor",key.title="Gene expression",cexCol=.65,cexRow=.7,
+            dendrogram="row",Colv=F,
+             key.xlab="Log2 difference\nfrom baseline expression",density.info="none",breaks = seq(-1.5, 1.5, length.out = 21))
+
+dev.off()
+### caspases
+pdf("caspases_scaled_centered.pdf")
+sig_vsd = data[rownames(data) %in% caspases,]
+  heatmap.2(scalerIN(sig_vsd),col=colors,scale="none", trace="none",distfun = function(x) get_dist(x,method="pearson"),srtCol=90,
+  xlab="", ylab="",main="Caspases",key.title="Gene expression",cexCol=.65,cexRow=.7,
+            dendrogram="row",Colv=F,
+             key.xlab="Log2 difference\nfrom baseline expression",density.info="none",breaks = seq(-1.5, 1.5, length.out = 21))
+
+dev.off()
+### caspase_activation
+pdf("caspase_activation_scaled_centered.pdf")
+sig_vsd = data[rownames(data) %in% caspase_activation,]
+  heatmap.2(scalerIN(sig_vsd),col=colors,scale="none", trace="none",distfun = function(x) get_dist(x,method="pearson"),srtCol=90,
+  xlab="", ylab="",main="Caspase Activation",key.title="Gene expression",cexCol=.65,cexRow=.7,
+            dendrogram="row",Colv=F,
+             key.xlab="Log2 difference\nfrom baseline expression",density.info="none",breaks = seq(-1.5, 1.5, length.out = 21))
+
+dev.off()
+### caspase_inhibition
+pdf("caspase_inhibition_scaled_centered.pdf")
+sig_vsd = data[rownames(data) %in% caspase_inhibition,]
+  heatmap.2(scalerIN(sig_vsd),col=colors,scale="none", trace="none",distfun = function(x) get_dist(x,method="pearson"),srtCol=90,
+  xlab="", ylab="",main="Caspase Inhibition",key.title="Gene expression",cexCol=.65,cexRow=.7,
+            dendrogram="row",Colv=F,
+             key.xlab="Log2 difference\nfrom baseline expression",density.info="none",breaks = seq(-1.5, 1.5, length.out = 21))
+
+dev.off()
+#####################
