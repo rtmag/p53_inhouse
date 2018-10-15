@@ -1,0 +1,41 @@
+require(Biobase)
+library(Mfuzz)
+library(goseq)
+library(GO.db)
+library(gplots)
+library(ggplot2)
+library(siggenes)
+options(bitmapType="cairo")
+options(scipen=999)
+library(limma)
+
+# READ IN data
+data<-read.table("Illu-Quant.txt",row.names=1,header=T,sep="\t")
+
+# Parsing names
+colnames(data)<-gsub("AVG_Signal.HCT116.","",colnames(data))
+colnames(data)<-gsub("p007","WT",colnames(data))
+colnames(data)<-gsub("\\.\\.",".",colnames(data),perl=T)
+
+# Design matrix
+samples <-gsub(".R.+","",colnames(data),perl=T)
+f <- factor (samples, levels=unique(samples))
+design <- model.matrix(~0+f)
+colnames(design) <- unique(samples)
+
+eset<-new("ExpressionSet", exprs=data.matrix(data))
+
+# linear model FIT
+fit <- lmFit(eset, design)
+
+# genes respond at either the 24 hour or 48 hour or 72 hour times in the wild-type? 
+cont.wt <- makeContrasts(
+      "WT.24h-WT.DMSO",
+      "WT.48h-WT.DMSO",
+      "WT.72h-WT.DMSO",
+  levels=design)
+ fit_wt <- contrasts.fit(fit, cont.wt)
+ fit_wt <- eBayes(fit_wt)
+ wt_table=topTableF(fit_wt,number=35000, adjust="BH")
+ table(wt_table$adj.P.Val<0.05)
+wtnames=rownames(wt_table[wt_table$adj.P.Val<0.05,])
