@@ -242,3 +242,24 @@ for( i in 1:length(interesting_genes) ){
 dev.off()
 		
 write.table(interesting_genes,file="cluster8_2FC_filtered_genes.txt",row.names=F,col.names=F,quote=F,sep="\t")
+##############################################################################################
+# NO CLUSTERING
+wt0<-rowMeans(data[rownames(data) %in% names(cl_wt$cluster),c(1,13)])
+wt24<-rowMeans(data[rownames(data) %in% names(cl_wt$cluster),c(2,14)])
+wt48<-rowMeans(data[rownames(data) %in% names(cl_wt$cluster),c(3,15)])
+wt72<-rowMeans(data[rownames(data) %in% names(cl_wt$cluster),c(4,16)])
+
+data_anova = data[rownames(data) %in% names(cl_wt$cluster),]
+		
+table((wt0-wt24)>1 & ((wt48-wt24)>1 | (wt72-wt24)>1 ) )
+		
+interesting_genes = rownames(data_anova[(wt0-wt24)>1 & ((wt48-wt24)>1 | (wt72-wt24)>1 ),])
+	
+pdf("NoClustering_2FC_filtered_genes.pdf")
+par(mfrow=c(3,3))
+for( i in 1:length(interesting_genes) ){
+	plot.gene.trajectories(interesting_genes[i],legend=F)
+	}
+dev.off()
+		
+write.table(interesting_genes,file="NoClustering_2FC_filtered_genes.txt",row.names=F,col.names=F,quote=F,sep="\t")
