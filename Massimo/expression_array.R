@@ -97,3 +97,8 @@ par(mfrow=c(4,4),c(5.1, 4.1, 4.1, 8.1), xpd=TRUE)
 for(j in 1:16){
 	plot.trajectories2(j)}
 dev.off()
+
+# Write up
+for(j in 1:16){
+write.table(names(which(cl_wt$cluster==j)),file=paste("cluster",j,"_GeneNames.txt"sep=""),row.names=F,col.names=F,quote=F,sep="\t")
+}
