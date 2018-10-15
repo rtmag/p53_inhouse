@@ -102,3 +102,8 @@ dev.off()
 for(j in 1:16){
 write.table(names(which(cl_wt$cluster==j)),file=paste("cluster",j,"_GeneNames.txt"sep=""),row.names=F,col.names=F,quote=F,sep="\t")
 }
+
+pdf("Color_Labels.pdf")
+plot.new()
+legend("center",  legend=c("WT","DNMT1-KO","TP53-KO"), fill=c('darkred','darkblue','darkgreen'), bty = "n",cex = 2.3)
+dev.off()
