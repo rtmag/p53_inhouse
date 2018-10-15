@@ -59,4 +59,20 @@ computeMatrix scale-regions \
 
 plotHeatmap -m /root/p53_dnmt1/heatmap/timecourse_genesbody_p53.mat \
 --colorMap Blues -out /root/p53_dnmt1/heatmap/timecourse_genesbody_p53.pdf
+############################################################################################################
 
+grep "Down" ../diffbind/diffreps/P53_48h_vs_24h_std_nsd20_modeN.bed > P53_diff.bed
+echo "#24h Doxo" >> P53_diff.bed
+grep "Up" ../diffbind/diffreps/P53_48h_vs_24h_std_nsd20_modeN.bed >> P53_diff.bed
+echo "#48h Doxo" >> P53_diff.bed
+
+
+computeMatrix reference-point \
+-S /root/p53_dnmt1/bw/P53_24h_doxo_s1.bw \
+/root/p53_dnmt1/bw/P53_48h_doxo_s1.bw \
+-R P53_diff.bed --referencePoint center \
+--sortRegions descend -bs 100 -a 2000 -b 2000 -p max \
+-out P53_diff.mat
+
+plotHeatmap -m P53_diff.mat --xAxisLabel "" --yAxisLabel "" --refPointLabel "P53 Peak" \
+--colorMap Blues -out P53_diff.pdf
