@@ -191,3 +191,11 @@ pdf("Color_Labels_gene_ofInterest.pdf")
 plot.new()
 legend("center",  legend=c("WT","DNMT1-KO","TP53-KO"), fill=c('red','blue','green'), bty = "n",cex = 2.3)
 dev.off()
+
+pdf("cluster2_genes.pdf")
+par(mfrow=c(3,3))
+cl_2 = names(which(cl_wt$cluster==2))
+for( i in 1:length(cl_2) ){
+	plot.gene.trajectories(cl_2[i],legend=F)
+	}
+dev.off()
