@@ -100,7 +100,7 @@ dev.off()
 
 # Write up
 for(j in 1:16){
-write.table(names(which(cl_wt$cluster==j)),file=paste("cluster",j,"_GeneNames.txt"sep=""),row.names=F,col.names=F,quote=F,sep="\t")
+write.table(names(which(cl_wt$cluster==j)),file=paste("cluster",j,"_GeneNames.txt",sep=""),row.names=F,col.names=F,quote=F,sep="\t")
 }
 
 pdf("Color_Labels.pdf")
