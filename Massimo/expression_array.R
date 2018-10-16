@@ -271,7 +271,7 @@ plot.gene.trajectories("PI4K2A",legend=F)
 plot.gene.trajectories("RHOD",legend=F)
 		
 plot.gene.trajectories("CAPN2",legend=F)
-plot.gene.trajectories("RAP1",legend=F)
+plot.gene.trajectories("RAP1A",legend=F)
 plot.gene.trajectories("CHD9",legend=F)
 		
 plot.gene.trajectories("INO80C",legend=F)
@@ -284,9 +284,9 @@ plot.gene.trajectories("KATNAL2",legend=F)
 		
 plot.gene.trajectories("BCL2A1",legend=F)
 plot.gene.trajectories("INCENP",legend=F)
-plot.gene.trajectories("EVER1",legend=F)
+plot.gene.trajectories("TMC6",legend=F)
 		
-plot.gene.trajectories("EVER2",legend=F)
+plot.gene.trajectories("TMC8",legend=F)
 plot.gene.trajectories("SUV39H1",legend=F)
 plot.gene.trajectories("CBX5",legend=F)	
 dev.off()
