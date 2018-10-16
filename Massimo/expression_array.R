@@ -265,7 +265,9 @@ plot.gene.trajectories("CSNK1E",legend=F)
 plot.gene.trajectories("S100A14",legend=F)
 dev.off()
 		
-pdf("Alu_neighbour_genes.pdf")		
+pdf("Alu_neighbour_genes.pdf")	
+par(mfrow=c(3,3))
+
 plot.gene.trajectories("GNG12",legend=F)
 plot.gene.trajectories("PI4K2A",legend=F)
 plot.gene.trajectories("RHOD",legend=F)
