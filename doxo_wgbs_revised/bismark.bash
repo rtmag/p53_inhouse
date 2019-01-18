@@ -1,3 +1,12 @@
+trim_galore --illumina --paired -o /root/hct116_wgbs_revised/trim \
+/root/wgbs_doxo/OriginalFastq/P007_48h_doxo_1.fq.gz \
+/root/wgbs_doxo/OriginalFastq/P007_48h_doxo_2.fq.gz &
+
+trim_galore --illumina --paired -o /root/hct116_wgbs_revised/trim \
+/root/wgbs_doxo/OriginalFastq/TP53del_48h_doxo_1.fq.gz \
+/root/wgbs_doxo/OriginalFastq/TP53del_48h_doxo_2.fq.gz &
+
+#########################################################################################
 
 ~/myPrograms/Bismark/bismark --bowtie2 --multicore 34 \
 /root/resources/hg38_bismark_vanilla/ \
@@ -13,3 +22,4 @@
 /root/resources/hg38_bismark_vanilla/ \
 -1 /root/wgbs_doxo/OriginalFastq/TP53del_48h_doxo_1.fq.gz \
 -2 /root/wgbs_doxo/OriginalFastq/TP53del_48h_doxo_2.fq.gz
+
