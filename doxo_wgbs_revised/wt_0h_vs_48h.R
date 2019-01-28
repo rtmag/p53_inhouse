@@ -1,8 +1,8 @@
 
 library(methylKit)
 
-file.list=list( "/root/HCT116_wgbs/combine_hct116_WGBS_1_val_1_bismark_bt2_pe.CpG_report.txt",
-               "/root/wgbs_doxo/OriginalFastq/P007_48h_doxo_1_bismark_bt2_pe.CpG_report.txt")
+file.list=list( "/root/hct116_wgbs_revised/combine_hct116_WGBS_1_val_1_bismark_bt2_pe.CpG_report.txt.gz",
+               "/root/hct116_wgbs_revised/P007_48h_doxo_1_val_1_bismark_bt2_pe.CpG_report.txt.gz")
 
 # read the files to a methylRawList object: myobj
 myobj=methRead(file.list,
@@ -12,7 +12,7 @@ myobj=methRead(file.list,
            context="CpG",
            pipeline="bismarkCytosineReport",
            header=FALSE,
-           mincov=5)
+           mincov=3)
 
 meth_0=unite(myobj, destrand=TRUE,mc.cores=40)
 pooled.meth_0=pool(meth_0,sample.ids=c("WT_0h","WT_48h"))
