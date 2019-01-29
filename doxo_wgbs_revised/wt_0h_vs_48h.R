@@ -20,7 +20,7 @@ pooled.myDiff_0=calculateDiffMeth(pooled.meth_0,num.cores=40)
 pooledData_0=getData(pooled.meth_0)
 
 wt0=fisher_0[fisher_0$qvalue<0.1 & abs(fisher_0$meth.diff)>25,]
-wt0_l=fisher_0[fisher_0$qvalue<0.1 & (fisher_0$meth.diff)>(-25),]
+wt0_l=fisher_0[fisher_0$qvalue<0.1 & (fisher_0$meth.diff)<(-25),]
 wt48_l=fisher_0[fisher_0$qvalue<0.1 & (fisher_0$meth.diff)>25,]
 
 write.table(wt0,"wt_0_48_methylated.bed",quote=F,col.names=F,row.names=F,sep="\t")
