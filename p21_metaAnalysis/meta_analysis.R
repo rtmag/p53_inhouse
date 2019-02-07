@@ -68,7 +68,15 @@ clab=cbind(OTHER_tr=col3[OTHER_tr],NUTILIN=col3[NUTILIN],DOXO=col3[DOXO],p53OE=c
            P21=col2[p21],
            OTHER_cell=col1[OTHER_cell],MCF7=col1[MCF7],U2OS=col1[U2OS],HCT116=col1[HCT116])
 
+rownames(clab) = colnames(data)
 
+clab_col = list( OTHER_tr=col3,NUTILIN=col3,DOXO=col3,p53OE=col3,
+           P21=col2,
+           OTHER_cell=col1,MCF7=col1,U2OS=col1,HCT116=col1 )
+
+
+library(pheatmap)
+pheatmap(matrix,col=colors,show_rownames=F,annotation_col=data.frame(clab),annotation_colors = clab_col)
 ##########################################################################################
 
 dream = read.csv("dream_targets.csv")
