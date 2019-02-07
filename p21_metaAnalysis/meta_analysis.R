@@ -106,3 +106,70 @@ grid.ls(grid.force()) # "col_annotation" looks like it's the one to edit
 grid.gedit("col_annotation", gp = gpar(col="black"))
 dev.off()
 ##########################################################################################
+
+selected_dream = c("EIF2C2",
+"ATAD2",
+"ATAD5",
+"AURKA",
+"AURKB",
+"BIRC5",
+"BLM",
+"BUB1",
+"CCNA2",
+"CCNB2",
+"CDC20",
+"CDC25A",
+"CDC25C",
+"CDC2",
+"CENPA",
+"CENPE",
+"CHEK1",
+"DSCC1",
+"E2F1",
+"E2F7",
+"E2F8",
+"EXO1",
+"FANCA",
+"FEN1",
+"FOXM1",
+"GINS1",
+"KIF14",
+"KIF20A",
+"KIF2C",
+"KIF4A",
+"KIF4B",
+"MCM2",
+"MCM4",
+"MELK",
+"MTBP",
+"FAM54A",
+"MYBL2",
+"NUF2",
+"PLK1",
+"PRC1",
+"PTTG1",
+"PTTG2",
+"RAD51",
+"RAD51AP1",
+"RAD54L",
+"RBL1",
+"RFC4",
+"SKA1",
+"SLC7A5",
+"TPX2",
+"TRIP13",
+"TROAP",
+"TTK",
+"UBE2C")
+
+matrix = data[rownames(data) %in% selected_dream,]
+
+png("p53_metaAnalysis_SelectedDream.png",width= 5.25,
+  height=10,units="in",
+  res=1200,pointsize=4)
+pheatmap(matrix,col=colors,show_rownames=T,annotation_col=data.frame(clab),
+        annotation_legend = FALSE,annotation_colors = clab_col,cellheight=9,cellwidth=8)
+library(grid)
+grid.ls(grid.force()) # "col_annotation" looks like it's the one to edit
+grid.gedit("col_annotation", gp = gpar(col="black"))
+dev.off()
