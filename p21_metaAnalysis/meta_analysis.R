@@ -20,8 +20,8 @@ p21 = as.character(unlist(x[2,2:dim(x)[2]]))
 cell = as.character(unlist(x[3,2:dim(x)[2]]))
 
 OTHER_tr = treatment
-OTHER_tr[!OTHER_tr %in% c("NUTILIN","DOXO","p53OE")]=1
-OTHER_tr[OTHER_tr %in% c("NUTILIN","DOXO","p53OE")]=2
+OTHER_tr[!OTHER_tr %in% c("NUTILIN","DOXO","p53OE")]=2
+OTHER_tr[OTHER_tr %in% c("NUTILIN","DOXO","p53OE")]=1
 OTHER_tr=as.numeric(OTHER_tr)
 
 NUTILIN = treatment
