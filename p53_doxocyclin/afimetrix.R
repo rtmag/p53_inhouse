@@ -9,19 +9,17 @@ library(GEOquery)
 
 # load series and platform data from GEO
 
-gset <- getGEO("GSE30753", GSEMatrix =TRUE, getGPL=F)
-if (length(gset) > 1) idx <- grep("GPL6244", attr(gset, "names")) else idx <- 1
-gset <- gset[[idx]]
-pData(gset)
+#gset <- getGEO("GSE30753", GSEMatrix =TRUE, getGPL=F)
+#if (length(gset) > 1) idx <- grep("GPL6244", attr(gset, "names")) else idx <- 1
+#gset <- gset[[idx]]
+#pData(gset)
 
 data.affy <- ReadAffy(celfile.path = "/home/rtm/Downloads/p53_doxocyclin/GSM", filenames = list.files())
 datExpr <- exprs(data.affy)
-
-datExpr <- exprs(gset)
 datExpr <- log2(datExpr)
 
+###################################################################################################################
 boxplot(datExpr,range=0, xaxt='n', xlab = "Array", main = "Boxplot", ylab = "Intensity")
-#
 
 i=1 
 plot(density((datExpr[,i]),na.rm=T),
@@ -29,19 +27,66 @@ plot(density((datExpr[,i]),na.rm=T),
 for(i in 2:dim(datExpr)[2]){
   lines(density((datExpr[,i]),na.rm=T))
 }
-
+###################################################################################################################
 datExpr_norm <- rma(data.affy, background=T, normalize=T, verbose=T)
-datExpr <- exprs(datExpr)
+datExpr <- exprs(datExpr_norm)
 datExpr <- log2(datExpr)
 
 library( biomaRt )
+library(annotate)
+library(hugene10sttranscriptcluster.db)
+annodb <- "hugene10sttranscriptcluster.db"
+ID     <- featureNames(data.affy)
+Symbol <- as.character(lookUp(ID, annodb, "SYMBOL"))
+Name   <- as.character(lookUp(ID, annodb, "GENENAME"))
+Entrez <- as.character(lookUp(ID, annodb, "ENTREZID"))
 
-ensembl <- useMart(biomart="ENSEMBL_MART_ENSEMBL",dataset="hsapiens_gene_ensembl",host="www.ensembl.org")
+phenoTable = pData(data.affy)
+rownames(datExpr) <- Symbol
 
-f <- listFilters(ensembl)
-a <- listAttributes(ensembl)
+datExpr = datExpr[Symbol!="NA",]
+#
+sample_names = colnames(datExpr)
+sample_names = gsub("0ng","NONE",sample_names)
+sample_names = gsub("3ng","LOW",sample_names)
+sample_names = gsub("5ng","HIGH",sample_names)
+sample_names = gsub(".+NONE","NONE",sample_names,perl=T)
+sample_names = gsub(".+LOW","LOW",sample_names,perl=T)
+sample_names = gsub(".+HIGH","HIGH",sample_names,perl=T)
+sample_names = gsub("h\\-.+","h",sample_names,perl=T)
+sample_names = paste(sample_names,1:4,sep="_")
+########################################################
+colnames(datExpr) = sample_names
+saveRDS(datExpr,"p53_doxocyclin.RDS")
+###################################################################################################################
+###################################################################################################################
+###################################################################################################################
+options(scipen=999)
+library(gplots)
+library(pheatmap)
+library(factoextra)
+library(RColorBrewer)
+colors <- c("green","white","red")
+ colors <- rev(colorRampPalette( (brewer.pal(9, "RdBu")) )(20))
 
-identifier <- "affy_hg_u133a"
-getinfo <- c("affy_hg_u133a", "ensembl_gene_id", "entrezgene", "external_gene_name")
-geneDat <- getBM(attributes = getinfo, filters=identifier, values = rownames(exprs(data.affy)),mart=ensembl)
+data = readRDS("p53_doxocyclin.RDS")
+data = data[,c(9:12,1:4,13:16,5:8,17:20)]
+
+c25 = read.table("cluster2_5_lsgenes_names.txt")
+c134 = read.table("cluster1_3_4_names.txt")
+
+c25 = as.character(c25[c25[,1] %in% rownames(data),1])
+c134 = as.character(c134[c134[,1] %in% rownames(data),1])  
+        
+c12345 = c(c25,c134)
+matrix = data[rownames(data) %in% c12345,]
+rlab = data.frame(genes = c(rep("down",length(c25)),rep("up",length(c134))))
+
+
+clab_col = list(genes = c(down="darkred",up="darkgreen"))
+
+
+pheatmap(matrix,col=colors,show_rownames=F,annotation_row=data.frame(rlab),cellwidth=8,
+        annotation_legend = FALSE,scale="row",cluster_cols=F,annotation_colors = clab_col)
+
 
