@@ -100,7 +100,7 @@ png("p53_metaAnalysis_stephProjected.png",width= 5.25,
   height=10,units="in",
   res=1200,pointsize=4)
 pheatmap(matrix,col=colors,show_rownames=F,annotation_col=data.frame(clab),annotation_row=data.frame(rlab),
-        annotation_legend = FALSE,annotation_colors = clab_col,cellheight=.30,cellwidth=8)
+        annotation_legend = FALSE,annotation_colors = clab_col,cellheight=.30,cellwidth=8,cluster_cols=F)
 library(grid)
 grid.ls(grid.force()) # "col_annotation" looks like it's the one to edit
 grid.gedit("col_annotation", gp = gpar(col="black"))
