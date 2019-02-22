@@ -86,7 +86,18 @@ rlab = data.frame(genes = c(rep("down",length(c25)),rep("up",length(c134))))
 clab_col = list(genes = c(down="darkred",up="darkgreen"))
 
 
-pheatmap(matrix,col=colors,show_rownames=F,annotation_row=data.frame(rlab),cellwidth=8,
-        annotation_legend = FALSE,scale="row",cluster_cols=F,annotation_colors = clab_col)
+clab_col = list( OTHER_tr=c(white="white",black="black"),NUTILIN=c(white="white",black="black"),
+                DOXO=c(white="white",black="black"),p53OE=c(white="white",black="black"),
+           P21=c(white="white",blue="blue"),
+           OTHER_cell=c(white="white",red="red"),MCF7=c(white="white",red="red"),
+                U2OS=c(white="white",red="red"),HCT116=c(white="white",red="red"),
+genes = c(down="darkred",up="darkgreen"))
 
 
+png("p53_doxocyclin_SelectedDream.png",width= 5.25,
+  height=10,units="in",
+res=1200,pointsize=4)
+
+pheatmap(matrix,col=colors,show_rownames=F,annotation_row=data.frame(rlab),cellwidth=10,
+        annotation_legend = F,scale="row",cluster_cols=F,annotation_colors = clab_col)
+dev.off()
