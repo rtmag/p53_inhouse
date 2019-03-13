@@ -356,3 +356,18 @@ for( i in 1:length(interesting_genes) ){
 dev.off()
 		
 write.table(interesting_genes,file="NoClustering_2FC_filtered_genes.txt",row.names=F,col.names=F,quote=F,sep="\t")
+		
+pdf("Known_p53_targets.pdf")
+par(mfrow=c(3,3))
+plot.gene.trajectories("CDKN1A",legend=F)
+plot.gene.trajectories("BBC3",legend=F)
+plot.gene.trajectories("C12ORF5",legend=F)
+		
+plot.gene.trajectories("BTG2",legend=F)
+plot.gene.trajectories("MDM2",legend=F)
+plot.gene.trajectories("FAS",legend=F)
+		
+plot.gene.trajectories("PLK3",legend=F)
+plot.gene.trajectories("PLK2",legend=F)
+plot.gene.trajectories("SESN1",legend=F)
+dev.off()
