@@ -52,3 +52,12 @@ pdf("birc5_barplot.pdf")
 barplot(barmat,beside=T,col=c("darkred","darkred","darkgreen","darkgreen","darkblue","darkblue"),ylim=c(0,13),main="BIRC5")
 dev.off()
 
+
+library(RColorBrewer)
+library(gplots)
+
+pdf("birc5_heatmap.pdf",height=4)
+  colors <- rev(colorRampPalette( (brewer.pal(9, "RdBu")) )(9))
+  heatmap.2(barmat,col=colors,scale="none", trace="none",srtCol=90,dendrogram = "none", Rowv = FALSE, Colv = FALSE,
+  xlab="", ylab="",key.title="Gene expression",cexCol=2,cexRow=1)
+dev.off()
